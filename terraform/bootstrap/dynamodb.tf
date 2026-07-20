@@ -8,13 +8,13 @@ resource "aws_dynamodb_table" "terraform_locks" {
 
   hash_key = "LockID"
 
-# type = "S" means its String btw
+  # type = "S" means its String btw
   attribute {
     name = "LockID"
     type = "S"
   }
 
-# Macam biasa, tagging / metadata for filtering, automation etc for later when we upgrade and employ CI/CD
+  # Macam biasa, tagging / metadata for filtering, automation etc for later when we upgrade and employ CI/CD
   tags = {
     Name        = "Terraform Locks"
     Project     = "Guitar Fretboard"
