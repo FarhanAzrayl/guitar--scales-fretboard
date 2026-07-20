@@ -1,3 +1,6 @@
+
+# Just remember that this is the state/declaration of what services will be used. If any services need to be added/removed, check/edit/declare/undeclare here
+
 module "s3" {
   source = "../../modules/s3"
 }
