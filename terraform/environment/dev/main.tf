@@ -8,7 +8,7 @@ module "s3" {
 module "cloudfront" {
   source = "../../modules/cloudfront"
 
-  bucket_domain_name = module.s3.bucket_domain_name
+  bucket_regional_domain_name = module.s3.bucket_regional_domain_name
 }
 
 module "lambda" {
