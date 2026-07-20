@@ -3,7 +3,7 @@
 
 aws_region = "ap-southeast-1"
 
-# Bucket Name dalam S3 nanti
-state_bucket_name = "farhanazrayl-guitar-tfstate"
+# Bucket Name in S3 to store the state lock (the thing that acts like a token so that the DB is locked if there is a second or more person trying to access the database)
+state_bucket_name = "tfstatelock-for-guitar-project"
 
 lock_table_name = "terraform-locks"
