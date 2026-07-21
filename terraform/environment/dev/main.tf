@@ -12,15 +12,18 @@ module "s3" {
   tags         = local.common_tags
 }
 
-# Disabling the other services first for testing as they are not built yet
-
-/*
 module "cloudfront" {
   source = "../../modules/cloudfront"
 
   bucket_regional_domain_name = module.s3.bucket_regional_domain_name
+  project_name                = var.project_name
+  environment                 = var.environment
+  tags                        = local.common_tags
 }
-*/
+
+
+# Disabling the other services first for testing as they are not built yet
+
 
 /*
 module "lambda" {
