@@ -6,10 +6,11 @@ module "s3" {
   source = "../../modules/s3"
 
   # Bucket name is pulled from locals
-  bucket_name  = local.bucket_name
-  environment  = var.environment
-  project_name = var.project_name
-  tags         = local.common_tags
+  bucket_name         = local.bucket_name
+  environment         = var.environment
+  project_name        = var.project_name
+  tags                = local.common_tags
+  website_source_path = "../../../frontend"
 
   # This is the ARN for Cloudfront
 
