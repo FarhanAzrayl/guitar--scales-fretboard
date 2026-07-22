@@ -10,6 +10,9 @@ module "s3" {
   environment  = var.environment
   project_name = var.project_name
   tags         = local.common_tags
+
+  # This is the ARN for Cloudfront
+  cloudfront_distribution_arn = module.cloudfront.distribution_arn
 }
 
 module "cloudfront" {
