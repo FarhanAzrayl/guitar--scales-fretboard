@@ -12,7 +12,11 @@ module "s3" {
   tags         = local.common_tags
 
   # This is the ARN for Cloudfront
+
+  /*
+  No longer needed sebab kita dah create the bucket policy module juuust below the cloudfront module there. See? See??
   cloudfront_distribution_arn = module.cloudfront.distribution_arn
+  */
 }
 
 module "cloudfront" {
@@ -22,6 +26,15 @@ module "cloudfront" {
   project_name                = var.project_name
   environment                 = var.environment
   tags                        = local.common_tags
+}
+
+# This is the extra module we had to create because of the circular dependancy issue we faced btw. Flaw in earlier design
+
+module "s3_bucket_policy" {
+  source                      = "../../modules/s3_bucket_policy"
+  bucket_id                   = module.s3.bucket_id
+  bucket_arn                  = module.s3.bucket_arn
+  cloudfront_distribution_arn = module.cloudfront.distribution_arn
 }
 
 
