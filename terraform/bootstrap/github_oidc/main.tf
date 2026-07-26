@@ -11,3 +11,5 @@ resource "aws_iam_openid_connect_provider" "github" {
 
   tags = var.tags
 }
+
+# This is using Amazon STS btw

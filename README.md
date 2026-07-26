@@ -6,7 +6,6 @@ Reasons for not using Javascript is to solidify the usage of cloud services lear
 Source for AWS Documentation: https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 
 23rd of July 2026:
-
 Had to create a new module for the S3 bucket policy, because of a dependancy issue and after troubleshooting, the current module responsibilities:
 
 This is for a reminder / reference
@@ -27,3 +26,9 @@ Cache Behavior
 S3 Bucket Policy Module
 Generating IAM policy
 Attaching policy
+
+24/7/2026
+Adding and setting up Cloudfron module. Had to fix all issues that came up when setting it up
+
+25/7/2026
+Adding Pipeline to the Github
