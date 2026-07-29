@@ -9,6 +9,7 @@ Source for AWS Documentation: https://registry.terraform.io/providers/hashicorp/
 30/7/2026
 - Done with Github Actions - multiple issues with the OIDC
 - Finally debugged The issue; the current setup is using GitHub's old immutable subject claim - Updatedating the module so that the module becomes modular/reusable
+- Hard coded the repo on the github_actions module instead of restructuring the module again. Testing
 
 29/7/2026
 Finished with the pipeline setup - testing
@@ -24,7 +25,6 @@ Adding and setting up Cloudfron module. Had to fix all issues that came up when 
 
 23/7/2026:
 Had to create a new module for the S3 bucket policy, because of a circular dependancy issue and after troubleshooting, the current module responsibilities:
-
 
 S3 Module
 Bucket
