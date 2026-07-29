@@ -81,21 +81,33 @@ data "aws_iam_policy_document" "github_actions_permissions" {
     effect = "Allow"
 
     actions = [
-      "iam:CreateRole",
-      "iam:DeleteRole",
-      "iam:GetRole",
-      "iam:UpdateRole",
-      "iam:PassRole",
+    
+    # If we keep having to add Roles here one by one for each access error we face, lets just use :* xD
 
-      "iam:CreatePolicy",
-      "iam:DeletePolicy",
-      "iam:GetPolicy",
+    # Roles
+    "iam:CreateRole",
+    "iam:DeleteRole",
+    "iam:GetRole",
+    "iam:UpdateRole",
+    "iam:PassRole",
+    "iam:TagRole",
+    "iam:UntagRole",
 
-      "iam:AttachRolePolicy",
-      "iam:DetachRolePolicy",
+    # Policies
+    "iam:CreatePolicy",
+    "iam:DeletePolicy",
+    "iam:GetPolicy",
+    "iam:GetPolicyVersion",
+    "iam:ListPolicyVersions",
 
-      "iam:TagRole",
-      "iam:UntagRole"
+    # Role Attachments
+    "iam:AttachRolePolicy",
+    "iam:DetachRolePolicy",
+    "iam:ListAttachedRolePolicies",
+
+    # OIDC Providers
+    "iam:GetOpenIDConnectProvider",
+    "iam:ListOpenIDConnectProviders"
     ]
 
     resources = ["*"]

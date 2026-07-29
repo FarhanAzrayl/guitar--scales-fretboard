@@ -21,7 +21,17 @@ jobs:
         # Downloads an action that clones your repository.
         uses: actions/checkout@v4
 
-        
+     # Use debugging steps below if needed
+     # - name: Debug OIDC Claims
+     #   uses: github/actions-oidc-debugger@v1
+
+     # - name: Debug GitHub Context
+     #   run: |
+     #     echo "Repository: ${{ github.repository }}"
+     #     echo "Ref: ${{ github.ref }}"
+     #     echo "Actor: ${{ github.actor }}"
+  
+
       - name: Configure AWS Credentials
         # Kita setup the OIDC for this
         # Official GitHub Action maintained by AWS. 

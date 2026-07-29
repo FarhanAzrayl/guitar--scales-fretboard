@@ -10,6 +10,7 @@ Source for AWS Documentation: https://registry.terraform.io/providers/hashicorp/
 - Done with Github Actions - multiple issues with the OIDC
 - Finally debugged The issue; the current setup is using GitHub's old immutable subject claim - Updatedating the module so that the module becomes modular/reusable
 - Hard coded the repo on the github_actions module instead of restructuring the module again. Testing
+- Access issues. Added more Roles to the list in github_actions role condition > Note: If we are facing too many access issues, might as well just use :* but lets kee it proper for now
 
 29/7/2026
 Finished with the pipeline setup - testing
