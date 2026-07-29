@@ -1,0 +1,48 @@
+name: Terraform Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  # GitHub will request OIDC token from GitHub's identity provider
+  id-token: write
+  contents: read
+
+
+jobs:
+  terraform:
+    name: Terraform Deployment
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+       # Downloads an action that clones your repository.
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        # Kita setup the OIDC for this
+        # Official GitHub Action maintained by AWS. 
+        # Purpose is to authenticate the runner to AWS.
+        uses: aws-actions/configure-aws-credentials@v4
+
+        with:
+          # Can double confirm dekat outputs from github_actions_role_arn if needed
+          role-to-assume: arn:aws:iam::151929428987:role/guitar-fretboard-dev-github-actions
+          aws-region: ap-southeast-1
+
+      # Atas tu we download/clone the repo, then kita setup the credentials (OIDC), this one is to download Terraform CLI for Terraform actions
+      - name: Setup Terraform
+        # Installs the Terraform CLI on the GitHub runner.
+        uses: hashicorp/setup-terraform@v3
+
+        with:
+          terraform_version: 1.13.1
+
+      - name: Terraform Init
+      # Github actions will start from the Root of the repo, so this points to the correct environment directory for the commands
+      # Kita set this automation for Dev first
+        working-directory: terraform/environment/dev
+
+        run: terraform init
