@@ -7,7 +7,7 @@
 
 data "aws_iam_policy_document" "cloudfront_access" {
 
- statement {
+  statement {
 
     effect = "Allow"
 
@@ -18,8 +18,8 @@ data "aws_iam_policy_document" "cloudfront_access" {
 
     resources = [
 
-    # Since we had to create this policy, it owns nothing so we had to the variable from this module
-    # Letak je /* so boleh access any object, no need to specify for this project I think
+      # Since we had to create this policy, it owns nothing so we had to the variable from this module
+      # Letak je /* so boleh access any object, no need to specify for this project I think
       "${var.bucket_arn}/*"
     ]
 
@@ -37,7 +37,7 @@ data "aws_iam_policy_document" "cloudfront_access" {
 
     # Who is this? Which Cloudfront Distribution (ARN)? Other ARN's than the one(s) that are stated here or if not matching, no access to the bucket
     condition {
-      test = "StringEquals"
+      test     = "StringEquals"
       variable = "AWS:SourceArn"
 
       # This is the ARN that we fetch from the Cloudfront modeule output

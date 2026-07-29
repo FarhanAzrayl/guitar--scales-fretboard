@@ -52,7 +52,7 @@ resource "aws_s3_bucket_public_access_block" "website" {
 resource "aws_s3_bucket_ownership_controls" "website" {
 
   bucket = aws_s3_bucket.website.id
-  
+
   rule {
     object_ownership = "BucketOwnerEnforced"
   }

@@ -4,102 +4,102 @@ data "aws_iam_policy_document" "github_actions_permissions" {
 
   # This is for GitHub's S3 access
   statement {
-  sid    = "S3Access"
-  effect = "Allow"
+    sid    = "S3Access"
+    effect = "Allow"
 
-  actions = [
-    "s3:*"
-  ]
+    actions = [
+      "s3:*"
+    ]
 
-  resources = ["*"]
-}
+    resources = ["*"]
+  }
 
   # This is for GitHub's Cloudfront Access
   statement {
-  sid    = "CloudFrontAccess"
-  effect = "Allow"
+    sid    = "CloudFrontAccess"
+    effect = "Allow"
 
-  actions = [
-    "cloudfront:*"
-  ]
+    actions = [
+      "cloudfront:*"
+    ]
 
-  resources = ["*"]
-}
+    resources = ["*"]
+  }
 
   # This is for GitHub's Lambda Access
   statement {
-  sid    = "LambdaAccess"
-  effect = "Allow"
+    sid    = "LambdaAccess"
+    effect = "Allow"
 
-  actions = [
-    "lambda:*"
-  ]
+    actions = [
+      "lambda:*"
+    ]
 
-  resources = ["*"]
-}
+    resources = ["*"]
+  }
 
-# This is for GitHub's API Gateway Access
-statement {
-  sid    = "ApiGatewayAccess"
-  effect = "Allow"
+  # This is for GitHub's API Gateway Access
+  statement {
+    sid    = "ApiGatewayAccess"
+    effect = "Allow"
 
-  actions = [
-    "apigateway:*"
-  ]
+    actions = [
+      "apigateway:*"
+    ]
 
-  resources = ["*"]
-}
+    resources = ["*"]
+  }
 
-# This is for GitHub's DynamoDB Access
-statement {
-  sid    = "DynamoDBAccess"
-  effect = "Allow"
+  # This is for GitHub's DynamoDB Access
+  statement {
+    sid    = "DynamoDBAccess"
+    effect = "Allow"
 
-  actions = [
-    "dynamodb:*"
-  ]
+    actions = [
+      "dynamodb:*"
+    ]
 
-  resources = ["*"]
-}
+    resources = ["*"]
+  }
 
-# This is for GitHub's CloudWatch Access
-statement {
-  sid    = "CloudWatchLogsAccess"
-  effect = "Allow"
+  # This is for GitHub's CloudWatch Access
+  statement {
+    sid    = "CloudWatchLogsAccess"
+    effect = "Allow"
 
-  actions = [
-    "logs:*"
-  ]
+    actions = [
+      "logs:*"
+    ]
 
-  resources = ["*"]
-}
+    resources = ["*"]
+  }
 
 
-# This is for GitHub's IAM Role Access (Jangan bagi :*, we give mana we need only)
-statement {
-  sid    = "IAMAccess"
-  effect = "Allow"
+  # This is for GitHub's IAM Role Access (Jangan bagi :*, we give mana we need only)
+  statement {
+    sid    = "IAMAccess"
+    effect = "Allow"
 
-  actions = [
-    "iam:CreateRole",
-    "iam:DeleteRole",
-    "iam:GetRole",
-    "iam:UpdateRole",
-    "iam:PassRole",
+    actions = [
+      "iam:CreateRole",
+      "iam:DeleteRole",
+      "iam:GetRole",
+      "iam:UpdateRole",
+      "iam:PassRole",
 
-    "iam:CreatePolicy",
-    "iam:DeletePolicy",
-    "iam:GetPolicy",
+      "iam:CreatePolicy",
+      "iam:DeletePolicy",
+      "iam:GetPolicy",
 
-    "iam:AttachRolePolicy",
-    "iam:DetachRolePolicy",
+      "iam:AttachRolePolicy",
+      "iam:DetachRolePolicy",
 
-    "iam:TagRole",
-    "iam:UntagRole"
-  ]
+      "iam:TagRole",
+      "iam:UntagRole"
+    ]
 
-  resources = ["*"]
-}
+    resources = ["*"]
+  }
 
 }
 

@@ -10,5 +10,5 @@ output "distribution_domain_name" {
 
 output "distribution_arn" {
   description = "The CloudFront distribution ARN."
-  value = aws_cloudfront_distribution.website.arn
+  value       = aws_cloudfront_distribution.website.arn
 }

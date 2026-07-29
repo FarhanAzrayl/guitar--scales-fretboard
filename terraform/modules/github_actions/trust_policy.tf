@@ -31,13 +31,13 @@ data "aws_iam_policy_document" "github_actions_trust" {
       ]
     }
 
+    # We are hard coding the repo here since the last time we used the old GitHub's immutable object claim. Now GitHub has updated (Can refer to Repo > Settings > OIDC)
     condition {
       test     = "StringLike"
       variable = "token.actions.githubusercontent.com:sub"
 
       values = [
-        for repository in var.allowed_repositories :
-        "repo:${repository}:ref:refs/heads/main"
+        "repo:FarhanAzrayl@294132580/guitar--scales-fretboard@1306462761:ref:refs/heads/main"
       ]
     }
   }

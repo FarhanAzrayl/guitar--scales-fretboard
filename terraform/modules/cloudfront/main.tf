@@ -2,8 +2,8 @@
 # This is the OAC (Origin Access Control) resource that we are creating in order for Cloudfront to be able to access resources. Think of this like it is an ID, or an ID/Access card to offices
 
 resource "aws_cloudfront_origin_access_control" "website" {
-  name = "${var.project_name}-${var.environment}-oac"
-  description = "Allows CloudFront to securely access the private S3 bucket."
+  name                              = "${var.project_name}-${var.environment}-oac"
+  description                       = "Allows CloudFront to securely access the private S3 bucket."
   origin_access_control_origin_type = "s3"
 
   # Important > Every request sent from CloudFront to S3 is cryptographically signed. This is for S3 to verify who this is: Cloudfront. 
@@ -18,16 +18,16 @@ resource "aws_cloudfront_origin_access_control" "website" {
 resource "aws_cloudfront_distribution" "website" {
   # If false, ofc la no traffic could go through
   enabled = true
- 
+
   origin {
 
-  # domain name ofc from the output S3 module sends on their output that was provided to them by the environment (dev/prod/test)
+    # domain name ofc from the output S3 module sends on their output that was provided to them by the environment (dev/prod/test)
     domain_name = var.bucket_regional_domain_name
-    origin_id = "s3-origin"
+    origin_id   = "s3-origin"
 
-  # This one literally dekat atas > the OAC that we just created on the first resource within this main.tf jugak
-  origin_access_control_id = aws_cloudfront_origin_access_control.website.id 
-        }
+    # This one literally dekat atas > the OAC that we just created on the first resource within this main.tf jugak
+    origin_access_control_id = aws_cloudfront_origin_access_control.website.id
+  }
 
   default_cache_behavior {
     # Notice that this is created just above us in the origin nest. It is referencing from the same resource block as when this is declared / created
@@ -52,20 +52,20 @@ resource "aws_cloudfront_distribution" "website" {
   }
   # This is the closing curly bracket for default_cache_behavior btw
 
-    # If we buy a domain, we completely replace this block with our purchased domain
-    viewer_certificate {
-      cloudfront_default_certificate = true
+  # If we buy a domain, we completely replace this block with our purchased domain
+  viewer_certificate {
+    cloudfront_default_certificate = true
+  }
+
+  # In case we want to restrict certain countries, this is where we set it up
+  restrictions {
+    geo_restriction {
+      restriction_type = "none"
     }
+  }
 
-    # In case we want to restrict certain countries, this is where we set it up
-    restrictions {
-        geo_restriction {
-        restriction_type = "none"
-                }
-        }
-
-    # If nothing specific is requested, the default object is as per declared here
-    default_root_object = "index.html"
+  # If nothing specific is requested, the default object is as per declared here
+  default_root_object = "index.html"
 
 }
 

@@ -4,7 +4,7 @@ variable "role_name" {
   type = string
 }
 
-# Variable for the list of repo yang kita nak allow for the OIDC/token to access
+# Variable for this module that is related to the list of repo yang kita nak allow for the OIDC/token to access (We parse this from environment - main.tf)
 
 variable "allowed_repositories" {
   description = "GitHub repositories allowed to assume this role."
