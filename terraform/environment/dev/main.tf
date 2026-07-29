@@ -38,6 +38,21 @@ module "s3_bucket_policy" {
   cloudfront_distribution_arn = module.cloudfront.distribution_arn
 }
 
+# GitHub Actions for CI/CD Pipeline of the project
+module "github_actions" {
+  source = "../../modules/github_actions"
+
+  role_name = "${var.project_name}-${var.environment}-github-actions"
+
+  # Add Repo's here
+  # Full link: https://github.com/FarhanAzrayl/guitar--scales-fretboard
+  allowed_repositories = [
+    "FarhanAzrayl/guitar--scales-fretboard"
+  ]
+
+  tags = local.common_tags
+}
+
 
 # Disabling the other services first for testing as they are not built yet
 
