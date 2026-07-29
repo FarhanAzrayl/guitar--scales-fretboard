@@ -18,7 +18,7 @@ jobs:
     
     steps:
       - name: Checkout Repository
-       # Downloads an action that clones your repository.
+        # Downloads an action that clones your repository.
         uses: actions/checkout@v4
 
       - name: Configure AWS Credentials
@@ -45,4 +45,30 @@ jobs:
       # Kita set this automation for Dev first
         working-directory: terraform/environment/dev
 
-        run: terraform init
+        # Adding -input=false just in case if there is a discrepancy from the remote state, Terraform will not ask for an input similar to the input before running Apply
+        run: terraform init -input=false
+
+      - name: Terraform Validate -input=false
+        working-directory: terraform/environment/dev
+
+        # Adding -input=false just in case if there is a discrepancy from the remote state, Terraform will not ask for an input similar to the input before running Apply
+        run: terraform validate
+
+      - name: Terraform Plan
+        working-directory: terraform/environment/dev
+
+        # Adding -input=false just in case if there is a discrepancy from the remote state, Terraform will not ask for an input similar to the input before running Apply
+        # Eventhough technically ktia boleh je skip plan and just go with apply terus, but this is considered good practice. If manual approval we will see the "plan before approving
+        run: terraform plan -input=false
+
+      - name: Terraform Apply
+        working-directory: terraform/environment/dev
+
+        # Adding -input=false just in case if there is a discrepancy from the remote state, Terraform akan tanya should we reconfigure? And we say noooo here
+        # Auto approve as of now. Later on if we want to simulate a working environment we tukar to manual approval - Approval from Repo
+        run: terraform apply -auto-approve -input=false
+
+# Change to defaults.run.working-directory later so tak payah nak declare the directory for each run/action command
+# defaults:
+#   run:
+#     working-directory: terraform/environment/dev
