@@ -54,22 +54,27 @@ module "github_actions" {
 }
 
 
+module "lambda" {
+
+  source = "../../modules/lambda"
+
+  project_name = var.project_name
+  environment  = var.environment
+  tags         = local.common_tags
+}
+
+
+
+module "apigateway" {
+  source            = "../../modules/apigateway"
+  project_name      = var.project_name
+  environment       = var.environment
+  lambda_invoke_arn = module.lambda.lambda_invoke_arn
+  tags              = local.common_tags
+}
+
 # Disabling the other services first for testing as they are not built yet
 
-
-/*
-module "lambda" {
-  source = "../../modules/lambda"
-}
-*/
-
-/*
-module "apigateway" {
-  source = "../../modules/apigateway"
-
-  lambda_arn = module.lambda.lambda_arn
-}
-*/
 
 /*
 module "dynamodb" {
