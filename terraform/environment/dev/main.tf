@@ -73,6 +73,16 @@ module "apigateway" {
   tags              = local.common_tags
 }
 
+# Adding this lambda_permissions module to resolve circular dependancy issue > API Gateway needed information from Lambda (ARN)
+
+module "lambda_permission" {
+
+  source = "../../modules/lambda/lambda_permission"
+
+  lambda_function_name     = module.lambda.lambda_function_name
+  apigateway_execution_arn = module.apigateway.execution_arn
+}
+
 # Disabling the other services first for testing as they are not built yet
 
 

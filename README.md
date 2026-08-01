@@ -15,6 +15,9 @@ Source for AWS Documentation: https://registry.terraform.io/providers/hashicorp/
 2/8/2026
 - Adding hashicorp/archive provider to the Terraform dev environment > ran terraform init
 - Adding apigateway module - Decided to use REST API, but since cost is considered we will not add API Gateway Caching, and we will try to not attach AWS WAF (Web Application Firewall) later on
+- Testing after addeding the deployment details in the API Gateway
+- Facing issues with Lambda and API Gateway architecture. Lambda > API Gateway, then API Gateway needs Lambda's invoked ARN - Circular dependency issue
+- Created a new module ONLY for Lambda permissions
 
 30/7/2026
 - Done with Github Actions - multiple issues with the OIDC

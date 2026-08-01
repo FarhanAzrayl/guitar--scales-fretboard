@@ -21,3 +21,12 @@ resource "aws_apigatewayv2_route" "default" {
   # Okay so this tells the call that this route uses this integration which involves THIS Lambda. Route only knows the integration, they know nothing about our Lambda
   target = "integrations/${aws_apigatewayv2_integration.lambda.id}"
 }
+
+
+# This is the part where this module publishes the API so it becomes accessible
+resource "aws_apigatewayv2_stage" "default" {
+  api_id = aws_apigatewayv2_api.http.id
+  name = "$default"
+  auto_deploy = true
+  tags = var.tags
+}
