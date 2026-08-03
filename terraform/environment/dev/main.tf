@@ -63,8 +63,6 @@ module "lambda" {
   tags         = local.common_tags
 }
 
-
-
 module "apigateway" {
   source            = "../../modules/apigateway"
   project_name      = var.project_name
@@ -81,6 +79,15 @@ module "lambda_permission" {
 
   lambda_function_name     = module.lambda.lambda_function_name
   apigateway_execution_arn = module.apigateway.execution_arn
+}
+
+module "scales" {
+
+  source = "../../modules/dynamodb/scales"
+
+  project_name = var.project_name
+  environment  = var.environment
+  tags         = local.common_tags
 }
 
 # Disabling the other services first for testing as they are not built yet

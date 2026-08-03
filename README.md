@@ -11,6 +11,9 @@ Reasons for not using Javascript is to solidify the usage of cloud services alre
 
 Source for AWS Documentation: https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 
+3/8/2026
+- Debugging Python codes locally first
+
 
 2/8/2026
 - Adding hashicorp/archive provider to the Terraform dev environment > ran terraform init
@@ -18,6 +21,7 @@ Source for AWS Documentation: https://registry.terraform.io/providers/hashicorp/
 - Testing after addeding the deployment details in the API Gateway
 - Facing issues with Lambda and API Gateway architecture. Lambda > API Gateway, then API Gateway needs Lambda's invoked ARN - Circular dependency issue
 - Created a new module ONLY for Lambda permissions
+- Finished creating the new module for Lambda's permissions. Resolved issue with circular dependancy between Lambda and API Gateway (Gateway requesting resource (ARN) from Lambda) after fixing multiple bugs and errors due to migrating the information from Lambda/permissions file to lambda/lambda_permissions/permissions file
 
 30/7/2026
 - Done with Github Actions - multiple issues with the OIDC
