@@ -12,8 +12,8 @@ Reasons for not using Javascript is to solidify the usage of cloud services alre
 Source for AWS Documentation: https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 
 3/8/2026
-- Debugging Python codes locally first
 - Added DynamoDB table for guitar scales
+- Debugging Python codes locally first
 
 2/8/2026
 - Adding hashicorp/archive provider to the Terraform dev environment > ran terraform init
@@ -31,19 +31,19 @@ Source for AWS Documentation: https://registry.terraform.io/providers/hashicorp/
 - Adding the groundwork for Lambda functionality
 
 29/7/2026
-Finished with the pipeline setup - testing
+- Finished with the pipeline setup - testing
 
 28/7/2026
-Issues with the setup of the pipeline - debugging
+- Issues with the setup of the pipeline - debugging
 
 25/7/2026
-Adding Pipeline to the Github
+- Adding Pipeline > Github Actions
 
 24/7/2026
-Adding and setting up Cloudfron module. Had to fix all issues that came up when setting it up
+- Adding and setting up Cloudfron module. Had to fix all issues that came up when setting it up
 
 23/7/2026:
-Had to create a new module for the S3 bucket policy, because of a circular dependancy issue and after troubleshooting, the current module responsibilities:
+- Had to create a new module for the S3 bucket policy, because of a circular dependancy issue and after troubleshooting, the current module responsibilities:
 
 S3 Module
 Bucket
