@@ -13,7 +13,7 @@ Source for AWS Documentation: https://registry.terraform.io/providers/hashicorp/
 
 3/8/2026
 - Debugging Python codes locally first
-
+- Added DynamoDB table for guitar scales
 
 2/8/2026
 - Adding hashicorp/archive provider to the Terraform dev environment > ran terraform init
