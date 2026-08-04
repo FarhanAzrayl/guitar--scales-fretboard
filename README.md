@@ -16,6 +16,7 @@ Source for AWS Documentation: https://registry.terraform.io/providers/hashicorp/
 - Added the IAM policies for the Lambda to access the tables created
 - Debugged Python codes in local > works. Now deploying > Testing the API endpoint for GET /scales first
 - API endpoint + /scales work but /tunings didn't work > Forgot to add the endpoint for the tunings table in the apigateway module > Now added
+- Facing issues with the frontend > Javascript is not executed > Debugging
 
 3/8/2026
 - Added DynamoDB table for guitar scales

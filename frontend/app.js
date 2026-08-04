@@ -1,26 +1,45 @@
+console.log("app.js loaded");
+
 const API_URL = "https://h95ozcu1tl.execute-api.ap-southeast-1.amazonaws.com";
 
 async function loadScales() {
 
-    const response = await fetch(`${API_URL}/scales`);
+    try {
 
-    const scales = await response.json();
+        console.log("Fetching scales...");
 
-    const select = document.getElementById("scale-select");
+        const response = await fetch(`${API_URL}/scales`);
 
-    select.innerHTML = "";
+        console.log(response);
 
-    scales.forEach(scale => {
+        const scales = await response.json();
 
-        const option = document.createElement("option");
+        console.log(scales);
 
-        option.value = scale.ScaleName;
+        const select = document.getElementById("scale-select");
 
-        option.textContent = scale.ScaleName;
+        select.innerHTML = "";
 
-        select.appendChild(option);
+        scales.forEach(scale => {
 
-    });
+            const option = document.createElement("option");
+
+            option.value = scale.ScaleName;
+            option.textContent = scale.ScaleName;
+
+            select.appendChild(option);
+
+        });
+
+        console.log("Finished");
+
+    }
+
+    catch (err) {
+
+        console.error(err);
+
+    }
 
 }
 
