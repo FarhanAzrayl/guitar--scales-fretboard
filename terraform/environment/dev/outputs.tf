@@ -33,3 +33,8 @@ output "github_actions_policy_arn" {
 
   value = module.github_actions.policy_arn
 }
+
+# Outputting the API endpoint - always check if correct before Applying
+output "api_endpoint" {
+  value = module.apigateway.api_endpoint
+}

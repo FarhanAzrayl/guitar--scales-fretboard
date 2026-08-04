@@ -14,7 +14,7 @@ Source for AWS Documentation: https://registry.terraform.io/providers/hashicorp/
 4/8/2026
 - Added DynamoDB table for tunings > Similar to scales
 - Added the IAM policies for the Lambda to access the tables created
-- Debugged Python codes in local > works. Now deploying
+- Debugged Python codes in local > works. Now deploying > Testing the API endpoint for GET /scales first
 
 
 3/8/2026
