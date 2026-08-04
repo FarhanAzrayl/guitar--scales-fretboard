@@ -60,7 +60,13 @@ module "lambda" {
 
   project_name = var.project_name
   environment  = var.environment
-  tags         = local.common_tags
+
+  # Kita tambah 2 ni sebab taknak separate the table permission for these two tables in DynamoDB for Lambda > No need to add a new module lagi.
+  # We will refer these from the scales and tunings module that we created
+  scales_table_arn  = module.scales.table_arn
+  tunings_table_arn = module.tunings.table_arn
+
+  tags = local.common_tags
 }
 
 module "apigateway" {
@@ -90,8 +96,17 @@ module "scales" {
   tags         = local.common_tags
 }
 
-# Disabling the other services first for testing as they are not built yet
 
+module "tunings" {
+
+  source = "../../modules/dynamodb/tunings"
+
+  project_name = var.project_name
+  environment  = var.environment
+  tags         = local.common_tags
+}
+
+# Disabling this since we are separating the tables on different modules (Remember that we want to implement serverless so lets not use RDS, malas nak manage SQL queries)
 
 /*
 module "dynamodb" {

@@ -11,6 +11,11 @@ Reasons for not using Javascript is to solidify the usage of cloud services alre
 
 Source for AWS Documentation: https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 
+4/8/2026
+- Added DynamoDB table for tunings > Similar to scales
+- Continue to debug Lambda/Python codes
+
+
 3/8/2026
 - Added DynamoDB table for guitar scales
 - Debugging Python codes locally first
