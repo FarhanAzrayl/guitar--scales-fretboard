@@ -66,6 +66,11 @@ module "lambda" {
   scales_table_arn  = module.scales.table_arn
   tunings_table_arn = module.tunings.table_arn
 
+  # Same as above, tapi ni untuk parse the table names, atas is to parse the ARN's
+  scales_table_name  = module.scales.table_name
+  tunings_table_name = module.tunings.table_name
+
+
   tags = local.common_tags
 }
 

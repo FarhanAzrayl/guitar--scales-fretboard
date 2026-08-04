@@ -29,3 +29,17 @@ variable "tunings_table_arn" {
 
   type = string
 }
+
+
+# The variables for the names of the tunings and scales tables
+variable "scales_table_name" {
+  description = "Scales DynamoDB table name."
+
+  type = string
+}
+
+variable "tunings_table_name" {
+  description = "Tunings DynamoDB table name."
+
+  type = string
+}

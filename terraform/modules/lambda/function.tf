@@ -19,4 +19,12 @@ resource "aws_lambda_function" "lambda" {
   architectures = [
     "x86_64"
   ]
+
+  # Remember that IAM's uses ARN for authorization, not the table names. Just try to internalize that ARNs > IAM permissions.
+environment {
+  variables = {
+    SCALES_TABLE  = var.scales_table_name
+    TUNINGS_TABLE = var.tunings_table_name
+  }
+ }
 }
