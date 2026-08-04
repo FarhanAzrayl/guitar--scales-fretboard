@@ -10,6 +10,8 @@ resource "aws_apigatewayv2_integration" "lambda" {
 }
 
 # Routing of the API Gateway, basically macam the reception bagi direction where to go
+
+# Ni untuk API endpoint for scales table
 resource "aws_apigatewayv2_route" "scales" {
 
   api_id = aws_apigatewayv2_api.http.id
@@ -19,6 +21,22 @@ resource "aws_apigatewayv2_route" "scales" {
 
   # Ni untuk get scales
   route_key = "GET /scales"
+
+  # Okay so this tells the call that this route uses this integration which involves THIS Lambda. Route only knows the integration, they know nothing about our Lambda
+  target = "integrations/${aws_apigatewayv2_integration.lambda.id}"
+}
+
+
+# Ni untuk API endpoint for tunings table
+resource "aws_apigatewayv2_route" "tunings" {
+
+  api_id = aws_apigatewayv2_api.http.id
+
+  # Matches every HTTP method and every path
+  # This will be based on Lambda's: event["requestContext"]["http"]["method"] and event["rawPath"] in the Zipfile handler
+
+  # Ni untuk get scales
+  route_key = "GET /tunings"
 
   # Okay so this tells the call that this route uses this integration which involves THIS Lambda. Route only knows the integration, they know nothing about our Lambda
   target = "integrations/${aws_apigatewayv2_integration.lambda.id}"
