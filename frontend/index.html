@@ -158,11 +158,50 @@
     </tbody>
 </table>
 
-<label for="scale-select">Scale</label>
+<div class="controls">
 
-<select id="scale-select">
-    <option>Loading...</option>
-</select>
+    <!-- Toggle -->
+    <div class="control-group">
+        <label>
+            <input
+                type="checkbox"
+                id="show-notes-toggle"
+            >
+            Show Notes on Fretboard
+        </label>
+    </div>
+
+    <!-- Tuning -->
+    <div class="control-group">
+        <label for="tuning-select">Tuning</label>
+
+        <select id="tuning-select">
+            <option>Loading...</option>
+        </select>
+    </div>
+
+    <!-- Root Note + Scale -->
+    <div class="control-row">
+
+        <div class="control-group">
+            <label for="root-note-select">Root Note</label>
+
+            <select id="root-note-select">
+                <option>Loading...</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label for="scale-select">Scale</label>
+
+            <select id="scale-select">
+                <option>Loading...</option>
+            </select>
+        </div>
+
+    </div>
+
+</div>
 
 <script src="app.js"></script>
 

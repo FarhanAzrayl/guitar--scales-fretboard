@@ -11,10 +11,17 @@ Reasons for not using Javascript is to solidify the usage of cloud services alre
 
 Source for AWS Documentation: https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 
+Note for later: 
+- CloudFront invalidation will cost money after 1000 requests. For this project, it will not be an issue > However, will setup CloudWatch notification later on
+
+7/8/2026
+- html file is not updated with each Terraform Apply > Need to invalidate manually through AWS Console
+- Adding behaviour for CloudFront cache invalidation for each time terraform apply is executed
+
+
 6/8/2026
 - Issue was caused by CORS > Adding CORS Access to the API Gateway to enable CloudFront to access
 - Added CORS configuration in the API Gateway module
-
 
 5/8/2026
 - Facing issues with the frontend > Javascript is not executed > Debugging
