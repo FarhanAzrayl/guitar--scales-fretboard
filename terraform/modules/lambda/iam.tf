@@ -29,11 +29,11 @@ data "aws_iam_policy_document" "dynamodb" {
     sid    = "ReadScalesAndTunings"
     effect = "Allow"
 
-      actions = [
+    actions = [
       # Lets not use /* if possible. Kita nak train the concept of least privillege
       "dynamodb:GetItem",
       "dynamodb:Query", # Ni untuk advanced lookups in case kita perlu later (Refer to the Terraform Registry documentation)
-      "dynamodb:Scan" # Scan/search the table
+      "dynamodb:Scan"   # Scan/search the table
     ]
 
     resources = [
@@ -45,12 +45,12 @@ data "aws_iam_policy_document" "dynamodb" {
 
 # Example name dia akan produce: guitar-fretboard-dev-lambda-dynamodb, guitar-fretboard-prod-lambda-dynamodb etc
 resource "aws_iam_policy" "dynamodb" {
-  name = "${var.project_name}-${var.environment}-lambda-dynamodb"
+  name        = "${var.project_name}-${var.environment}-lambda-dynamodb"
   description = "Allows Lambda to read DynamoDB tables."
-  policy = data.aws_iam_policy_document.dynamodb.json
+  policy      = data.aws_iam_policy_document.dynamodb.json
 }
 
 resource "aws_iam_role_policy_attachment" "dynamodb" {
-  role = aws_iam_role.lambda.name
+  role       = aws_iam_role.lambda.name
   policy_arn = aws_iam_policy.dynamodb.arn
 }

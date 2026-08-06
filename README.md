@@ -11,12 +11,18 @@ Reasons for not using Javascript is to solidify the usage of cloud services alre
 
 Source for AWS Documentation: https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 
+6/8/2026
+- Issue was caused by CORS > Adding CORS Access to the API Gateway to enable CloudFront to access
+
+
+5/8/2026
+- Facing issues with the frontend > Javascript is not executed > Debugging
+
 4/8/2026
 - Added DynamoDB table for tunings > Similar to scales
 - Added the IAM policies for the Lambda to access the tables created
 - Debugged Python codes in local > works. Now deploying > Testing the API endpoint for GET /scales first
 - API endpoint + /scales work but /tunings didn't work > Forgot to add the endpoint for the tunings table in the apigateway module > Now added
-- Facing issues with the frontend > Javascript is not executed > Debugging
 
 3/8/2026
 - Added DynamoDB table for guitar scales
