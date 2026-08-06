@@ -23,3 +23,9 @@ variable "tags" {
 
   type = map(string)
 }
+
+# Adding CORS access to this API Gateway
+
+variable "allowed_origins" {
+  type = list(string)
+}

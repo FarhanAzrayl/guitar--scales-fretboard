@@ -80,6 +80,11 @@ module "apigateway" {
   environment       = var.environment
   lambda_invoke_arn = module.lambda.lambda_invoke_arn
   tags              = local.common_tags
+
+  # This is for CORS Cloudfront access
+  allowed_origins = [
+    module.cloudfront.domain_name
+  ]
 }
 
 # Adding this lambda_permissions module to resolve circular dependancy issue > API Gateway needed information from Lambda (ARN)
