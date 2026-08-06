@@ -39,7 +39,7 @@ async function loadTunings() {
 }
 
 
-//This one untuk tukar the scales dropdown and pull the data from DynamoDB
+//This one untuk tukar the scales dropdown and pull the data from DynamoDB -
 
 async function loadScales() {
 
