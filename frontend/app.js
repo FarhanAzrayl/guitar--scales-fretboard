@@ -7,33 +7,36 @@ const API_URL = "https://h95ozcu1tl.execute-api.ap-southeast-1.amazonaws.com";
 
 async function loadTunings() {
 
-    const response = await fetch(`${API_URL}/tunings`);
+    try {
 
-    const tunings = await response.json();
+        const response = await fetch(`${API_URL}/tunings`);
 
-    const select = document.getElementById("tuning-select");
+        const tunings = await response.json();
 
-    select.innerHTML = "";
+        const select = document.getElementById("tuning-select");
 
-    tunings.forEach(tuning => {
+        select.innerHTML = "";
 
-        const option = document.createElement("option");
+        tunings.forEach(tuning => {
 
-        option.value = tuning.TuningName;
-        option.textContent = tuning.TuningName;
+            const option = document.createElement("option");
 
-        select.appendChild(option);
+            option.value = tuning.TuningName;
+            option.textContent = tuning.TuningName;
 
-    });
+            select.appendChild(option);
 
+        });
 
-}
+    }
 
-catch (err) {
+    catch (err) {
 
         console.error(err);
 
     }
+
+}
 
 
 //This one untuk tukar the scales dropdown and pull the data from DynamoDB
