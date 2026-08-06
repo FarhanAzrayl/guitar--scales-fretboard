@@ -81,9 +81,9 @@ module "apigateway" {
   lambda_invoke_arn = module.lambda.lambda_invoke_arn
   tags              = local.common_tags
 
-  # This is for CORS Cloudfront access
+  # This is for CORS Cloudfront access > This is to read the CloudFront as https://d1hlg16pug3eiu.cloudfront.net for example
   allowed_origins = [
-    module.cloudfront.domain_name
+    "https://${module.cloudfront.distribution_domain_name}"
   ]
 }
 

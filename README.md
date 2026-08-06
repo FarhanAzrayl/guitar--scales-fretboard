@@ -13,6 +13,7 @@ Source for AWS Documentation: https://registry.terraform.io/providers/hashicorp/
 
 6/8/2026
 - Issue was caused by CORS > Adding CORS Access to the API Gateway to enable CloudFront to access
+- Added CORS configuration in the API Gateway module
 
 
 5/8/2026

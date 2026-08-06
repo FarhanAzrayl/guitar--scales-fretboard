@@ -9,5 +9,31 @@ resource "aws_apigatewayv2_api" "http" {
 
   protocol_type = "HTTP"
 
+# Adding CORS to this API Gateway for Cloudfront access
+
+cors_configuration {
+  allow_origins = var.allowed_origins
+
+  allow_methods = [
+    # Just use all lah senang
+    "*"
+
+  /*
+  Examples for later if nak improve and applykan the concept of least privillege
+  "GET",
+  "OPTIONS"
+  */
+  
+  ]
+
+  allow_headers = [
+    "Content-Type"
+  ]
+
+  allow_credentials = false
+}
+
   tags = var.tags
 }
+
+
