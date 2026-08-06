@@ -3,7 +3,7 @@ console.log("app.js loaded");
 const API_URL = "https://h95ozcu1tl.execute-api.ap-southeast-1.amazonaws.com";
 
 
-<!--This one untuk tukar the scales dropdown and pull the data from DynamoDB -->
+//This one untuk tukar the scales dropdown and pull the data from DynamoDB
 
 async function loadTunings() {
 
@@ -26,10 +26,17 @@ async function loadTunings() {
 
     });
 
+
 }
 
+catch (err) {
 
-<!--This one untuk tukar the scales dropdown and pull the data from DynamoDB -->
+        console.error(err);
+
+    }
+
+
+//This one untuk tukar the scales dropdown and pull the data from DynamoDB
 
 async function loadScales() {
 
@@ -72,7 +79,7 @@ async function loadScales() {
 
 }
 
-<!--This one untuk tukar the Root Notes dekat the Guitar Fretboard. The notes we define here, tak payah overcomplicate and store dalam DynamoDB -->
+//This one untuk tukar the Root Notes dekat the Guitar Fretboard. The notes we define here, tak payah overcomplicate and store dalam DynamoDB -->
 
 function loadRootNotes() {
 
