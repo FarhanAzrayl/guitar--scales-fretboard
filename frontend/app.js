@@ -20,6 +20,64 @@ async function initializeApp() {
 
 initializeApp();
 
+// This one untuk populate the Tuning dropdown from DynamoDB
+
+async function loadTunings() {
+
+    try {
+        const response = await fetch(`${API_URL}/tunings`);
+        const tunings = await response.json();
+        const select = document.getElementById("tuning-select");
+
+        select.innerHTML = "";
+
+        tunings.forEach(tuning => {
+
+            const option = document.createElement("option");
+
+            option.value = tuning.TuningName;
+            option.textContent = tuning.TuningName;
+            
+            select.appendChild(option);
+        });
+
+    }
+
+    catch (err) {
+
+        console.error(err);
+    }
+}
+
+// This one untuk populate the Scale dropdown from DynamoDB
+
+async function loadScales() {
+
+    try {
+
+        const response = await fetch(`${API_URL}/scales`);
+        const scales = await response.json();
+        const select = document.getElementById("scale-select");
+
+        select.innerHTML = "";
+
+        scales.forEach(scale => {
+
+            const option = document.createElement("option");
+
+            option.value = scale.ScaleName;
+            option.textContent = scale.ScaleName;
+
+            select.appendChild(option);
+
+        });
+    }
+
+    catch (err) {
+        console.error(err);
+    }
+}
+
 
 // This one yang akan add the event listeners to elements mana and also the toggle button yang selected from the html,
 // so bila kita change the value dia akan trigger the renderFretboard function
@@ -70,20 +128,20 @@ function renderFretboard() {
 
     // Ni function untuk load the Root notes > This function is saying return selected value from "tuning-select" from our html
     function getSelectedTuning() {
-    const select = document.getElementById("tuning-select");
-    return select.value;
+        const select = document.getElementById("tuning-select");
+        return select.value;
     }
 
     // Ni function untuk load the Root notes > This function is saying return selected value from "root-note-select" from our html
     function getSelectedRootNote() {
-    const select = document.getElementById("root-note-select");
-    return select.value;
+        const select = document.getElementById("root-note-select");
+        return select.value;
     }
 
     // Ni function untuk load the Root notes > This function is saying return selected value from "scale-select" from our html
     function getSelectedScale() {
-    const select = document.getElementById("scale-select");
-    return select.value;
+        const select = document.getElementById("scale-select");
+        return select.value;
     }
 
 
