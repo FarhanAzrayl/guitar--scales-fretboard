@@ -3,6 +3,7 @@ console.log("app.js loaded");
 const API_URL = "https://h95ozcu1tl.execute-api.ap-southeast-1.amazonaws.com";
 
 // Just defining the notes here, so we can use it later for the root note dropdown and also for the fretboard rendering
+// The index of the arrays are C = 0, C# = 1,  so forth and so on okeii
 
 const NOTES = [
     "C",
@@ -138,6 +139,11 @@ function renderFretboard() {
     rootNote,
     scale
     });
+
+    // TESTING NAK TENGOK DEKAT CONSOLE DIA READ AS APA, REMOVE AFTER DONE
+    console.log(getNoteAtFret("E", 0));
+    // TESTING NAK TENGOK DEKAT CONSOLE DIA READ AS APA, REMOVE AFTER DONE
+
    // Previous console log > We make them prettier sikit
    // console.log(tuning);
    // console.log(rootNote);
@@ -145,28 +151,37 @@ function renderFretboard() {
 
 }
 
+// Just calling all the frets from the html > returned as array
 function getAllFrets() {
     return document.querySelectorAll(".fret");
 }
 
+// Ni untuk determine the first note from fret 0, in which will dictate how the notes on the frets of a string will auto-populdate
+function getNoteAtFret(openNote, fret) {
+    // indexOf() ni untuk return the index of the note that is on the fret of the open note (note 0) and dia akan compare to the NOTES array yang kita declare dekat atas tu
+    const startIndex = NOTES.indexOf(openNote);
+    console.log(startIndex);
 
-    // Ni function untuk load the Root notes > This function is saying return selected value from "tuning-select" from our html
-    function getSelectedTuning() {
-        const select = document.getElementById("tuning-select");
-        return select.value;
-    }
+}
 
-    // Ni function untuk load the Root notes > This function is saying return selected value from "root-note-select" from our html
-    function getSelectedRootNote() {
-        const select = document.getElementById("root-note-select");
-        return select.value;
-    }
 
-    // Ni function untuk load the Root notes > This function is saying return selected value from "scale-select" from our html
-    function getSelectedScale() {
-        const select = document.getElementById("scale-select");
-        return select.value;
-    }
+// Ni function untuk load the Root notes > This function is saying return selected value from "tuning-select" from our html
+function getSelectedTuning() {
+    const select = document.getElementById("tuning-select");
+    return select.value;
+}
+
+// Ni function untuk load the Root notes > This function is saying return selected value from "root-note-select" from our html
+function getSelectedRootNote() {
+    const select = document.getElementById("root-note-select");
+    return select.value;
+}
+
+// Ni function untuk load the Root notes > This function is saying return selected value from "scale-select" from our html
+function getSelectedScale() {
+    const select = document.getElementById("scale-select");
+    return select.value;
+}
 
 
  // We are just looping the notes from the Notes dekat atas sekali tu
