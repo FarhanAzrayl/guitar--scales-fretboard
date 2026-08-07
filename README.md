@@ -21,7 +21,7 @@ Note for later:
 - Testing the function if a value more than the array will be called console > Changed from using if/else to using modulo % to return the remainder for better loop wrap around if value is higher than the max length of the array. Current array is from [0] - [12]
 - Testing if all the notes will appear on the fretboard
 - Fixing errors, notes not rendered correctly. Testing and debugging
-
+- Testing toggle button's functionality
 
 
 -  Current issue as of this date, each deployment does not reflect on the CloudFront > Would have to invalidate the cache with every deployment > Will add the invalidation behaviour for CloudFront in Terraform later after everything is done

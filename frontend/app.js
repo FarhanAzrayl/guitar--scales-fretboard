@@ -132,6 +132,10 @@ function renderFretboard() {
 
     const frets = getAllFrets();
 
+    // Ni untuk Toggle btw
+    const showNotes = shouldShowNotes();
+    console.log(showNotes);
+
     // This is to loop through all the frets and then populate the note on each fret based on the open note and the fret number
     // The function is declared below; function getNoteAtFret(openNote, fret)
     frets.forEach(fret => {
@@ -148,10 +152,6 @@ function renderFretboard() {
     
     // Bring this back nanti if the if/else doesn't work
     // fret.textContent = note; 
-
-    // Ni untuk Toggle btw
-    const showNotes = shouldShowNotes();
-    console.log(showNotes);
 
 });
 
@@ -191,8 +191,6 @@ function getNoteAtFret(openNote, fret) {
     // The normal lesser than will basically be for example 4+3/12 = 7/12 = 0, but the remainder is 7
     const noteIndex = (startIndex + fret) % NOTES.length;
     return NOTES[noteIndex];
-
-    fret.textContent = note;
 
 }
 
