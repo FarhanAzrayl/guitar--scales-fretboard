@@ -17,6 +17,12 @@ Note for later:
 8/82026
 - Fixed the errors on Javascript file; app.js again after facing errors when adding new functions > Testing
 - Changed the table frets for easier navigation letter for re-rendering, added values to indicate which string, frets and which fret is a normal fret and which has a marker (dots)
+- Testing if the function to read the index is running correctly on the console
+- Testing the function if a value more than the array will be called console > Changed from using if/else to using modulo % to return the remainder for better loop wrap around if value is higher than the max length of the array. Current array is from [0] - [12]
+- Testing if all the notes will appear on the fretboard
+- Fixing errors, notes not rendered correctly. Testing and debugging
+
+
 
 -  Current issue as of this date, each deployment does not reflect on the CloudFront > Would have to invalidate the cache with every deployment > Will add the invalidation behaviour for CloudFront in Terraform later after everything is done
 

@@ -138,7 +138,20 @@ function renderFretboard() {
     const openNote = fret.dataset.openNote;
     const fretNumber = Number(fret.dataset.fret);
     const note = getNoteAtFret(openNote, fretNumber);
-    fret.textContent = note;
+
+    if (showNotes) {
+        fret.textContent = note;
+        }
+    else {
+        fret.textContent = "";
+        }
+    
+    // Bring this back nanti if the if/else doesn't work
+    // fret.textContent = note; 
+
+    // Ni untuk Toggle btw
+    const showNotes = shouldShowNotes();
+    console.log(showNotes);
 
 });
 
@@ -221,5 +234,13 @@ function loadRootNotes() {
         select.appendChild(option);
 
     });
+
+}
+
+// This one is for the Toggle button
+
+function shouldShowNotes() {
+
+    return document.getElementById("show-notes-toggle").checked;
 
 }
