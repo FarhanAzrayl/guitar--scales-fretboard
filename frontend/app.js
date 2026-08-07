@@ -142,20 +142,6 @@ function renderFretboard() {
 
     // TESTING NAK TENGOK DEKAT CONSOLE DIA READ AS APA, REMOVE AFTER DONE
     // console.log(getNoteAtFret("E", 0)); -> Success yesss
-    console.log(getNoteAtFret("E", 0));
-    console.log(getNoteAtFret("E", 1));
-    console.log(getNoteAtFret("E", 2));
-    console.log(getNoteAtFret("E", 3));
-    console.log(getNoteAtFret("E", 4));
-    console.log(getNoteAtFret("E", 5));
-    console.log(getNoteAtFret("E", 6));
-    console.log(getNoteAtFret("E", 7));
-    console.log(getNoteAtFret("E", 8));
-    console.log(getNoteAtFret("E", 9));
-    console.log(getNoteAtFret("E", 10));
-    console.log(getNoteAtFret("E", 11));
-    console.log(getNoteAtFret("E", 12));
-
     // TESTING NAK TENGOK DEKAT CONSOLE DIA READ AS APA, REMOVE AFTER DONE
 
    // Previous console log > We make them prettier sikit
@@ -167,13 +153,19 @@ function renderFretboard() {
 
 // Just calling all the frets from the html > returned as array
 function getAllFrets() {
-    return document.querySelectorAll(".fret");
+    // Ingat, for note 0 or the open string, the class name we gave is different. Tapi kita dah bagi value on each fret/string. So we use those instead. 
+    // data-string = which string?
+    // data-fret = which fret?
+    return document.querySelectorAll("[data-string][data-fret]");
 }
 
 // Ni untuk determine the first note from fret 0, in which will dictate how the notes on the frets of a string will auto-populdate
 function getNoteAtFret(openNote, fret) {
     // indexOf() ni untuk return the index of the note that is on the fret of the open note (note 0) and dia akan compare to the NOTES array yang kita declare dekat atas tu
     const startIndex = NOTES.indexOf(openNote);
+    // % is used to return the remainder after division. So, if the index + fret is equals to 12, (array kita sampai [11] only), it will divide and then return the remainder
+    // Basically loops back to the front of the array/index. 14 / 12, baki 2. So the array that it returns is [2]
+    // The normal lesser than will basically be for example 4+3/12 = 7/12 = 0, but the remainder is 7
     const noteIndex = (startIndex + fret) % NOTES.length;
     return NOTES[noteIndex];
 
