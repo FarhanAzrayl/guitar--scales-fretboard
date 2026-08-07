@@ -3,86 +3,89 @@ console.log("app.js loaded");
 const API_URL = "https://h95ozcu1tl.execute-api.ap-southeast-1.amazonaws.com";
 
 
-//This one untuk tukar the scales dropdown and pull the data from DynamoDB
+// Lets mix all into one startup function, much cleaner nanti susah nak organize if buat satu2
 
-async function loadTunings() {
+async function initializeApp() {
 
-    try {
+    await loadTunings();
 
-        const response = await fetch(`${API_URL}/tunings`);
+    await loadScales();
 
-        const tunings = await response.json();
+    loadRootNotes();
 
-        const select = document.getElementById("tuning-select");
+    addEventListeners();
+    renderFretboard();
 
-        select.innerHTML = "";
+}
 
-        tunings.forEach(tuning => {
+initializeApp();
 
-            const option = document.createElement("option");
 
-            option.value = tuning.TuningName;
-            option.textContent = tuning.TuningName;
+// This one yang akan add the event listeners to elements mana and also the toggle button yang selected from the html,
+// so bila kita change the value dia akan trigger the renderFretboard function
 
-            select.appendChild(option);
+function addEventListeners() {
 
-        });
+    document
+        .getElementById("tuning-select")
+        .addEventListener("change", renderFretboard);
 
-    }
+    document
+        .getElementById("root-note-select")
+        .addEventListener("change", renderFretboard);
 
-    catch (err) {
+    document
+        .getElementById("scale-select")
+        .addEventListener("change", renderFretboard);
 
-        console.error(err);
-
-    }
+    document
+        .getElementById("show-notes-toggle")
+        .addEventListener("change", renderFretboard);
 
 }
 
 
-//This one untuk tukar the scales dropdown and pull the data from DynamoDB -
 
-async function loadScales() {
+// This one yang akan render the fretboard ikut the data from input kita ambik from above
 
-    try {
+function renderFretboard() {
 
-        console.log("Fetching scales...");
+    const tuning = getSelectedTuning();
+    const rootNote = getSelectedRootNote();
+    const scale = getSelectedScale();
 
-        const response = await fetch(`${API_URL}/scales`);
 
-        console.log(response);
-
-        const scales = await response.json();
-
-        console.log(scales);
-
-        const select = document.getElementById("scale-select");
-
-        select.innerHTML = "";
-
-        scales.forEach(scale => {
-
-            const option = document.createElement("option");
-
-            option.value = scale.ScaleName;
-            option.textContent = scale.ScaleName;
-
-            select.appendChild(option);
-
-        });
-
-        console.log("Finished");
-
-    }
-
-    catch (err) {
-
-        console.error(err);
-
-    }
+    console.log("Current Selection:", {
+    tuning,
+    rootNote,
+    scale
+    });
+   // Previous console log > We make them prettier sikit
+   // console.log(tuning);
+   // console.log(rootNote);
+   // console.log(scale);
 
 }
 
-//This one untuk tukar the Root Notes dekat the Guitar Fretboard. The notes we define here, tak payah overcomplicate and store dalam DynamoDB -->
+
+    // Ni function untuk load the Root notes > This function is saying return selected value from "tuning-select" from our html
+    function getSelectedTuning() {
+    const select = document.getElementById("tuning-select");
+    return select.value;
+    }
+
+    // Ni function untuk load the Root notes > This function is saying return selected value from "root-note-select" from our html
+    function getSelectedRootNote() {
+    const select = document.getElementById("root-note-select");
+    return select.value;
+    }
+
+    // Ni function untuk load the Root notes > This function is saying return selected value from "scale-select" from our html
+    function getSelectedScale() {
+    const select = document.getElementById("scale-select");
+    return select.value;
+    }
+
 
 function loadRootNotes() {
 
@@ -117,7 +120,3 @@ function loadRootNotes() {
     });
 
 }
-
-loadTunings();
-loadScales();
-loadRootNotes();
