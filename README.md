@@ -23,7 +23,8 @@ Note for later:
 - Fixing errors, notes not rendered correctly. Testing and debugging
 - Testing toggle button's functionality
 - Fixed the issue where the initial tuning notes, dot markers, and 12th notes double markers are gone when toggled off > Testing
-
+- Faced issue after adding more fields and attributes to the DynamoDB table
+- boto3 is unable to read Python integers and changes it to decimal > Added import for decimal-integer in the Python code
 
 -  Current issue as of this date, each deployment does not reflect on the CloudFront > Would have to invalidate the cache with every deployment > Will add the invalidation behaviour for CloudFront in Terraform later after everything is done
 

@@ -2,6 +2,18 @@
 import boto3
 import json
 import os
+from decimal import Decimal
+
+class DecimalEncoder(json.JSONEncoder):
+
+    def default(self, obj):
+
+        if isinstance(obj, Decimal):
+
+            return int(obj)
+
+        return super().default(obj)
+
 
 dynamodb = boto3.resource("dynamodb")
 
@@ -31,7 +43,10 @@ def lambda_handler(event, context):
             "headers": {
                 "Content-Type": "application/json"
             },
-            "body": json.dumps(response["Items"])
+            "body": json.dumps(
+                response["Items"],
+                cls=DecimalEncoder
+            )
         }
 
     elif path == "/tunings":
@@ -43,7 +58,10 @@ def lambda_handler(event, context):
             "headers": {
                 "Content-Type": "application/json"
             },
-            "body": json.dumps(response["Items"])
+            "body": json.dumps(
+                response["Items"],
+                cls=DecimalEncoder
+            )
         }
 
 
