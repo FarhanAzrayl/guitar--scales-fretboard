@@ -16,7 +16,9 @@ Note for later:
 
 8/82026
 - Fixed the errors on Javascript file; app.js again after facing errors when adding new functions > Testing
--  Current issue as of this date, each deployment does not reflect on the CloudFront > Would have to invalidate the cache with every deployment > Will add the invalidation behaviour in Terraform later after everything is done
+- Changed the table frets for easier navigation letter for re-rendering, added values to indicate which string, frets and which fret is a normal fret and which has a marker (dots)
+
+-  Current issue as of this date, each deployment does not reflect on the CloudFront > Would have to invalidate the cache with every deployment > Will add the invalidation behaviour for CloudFront in Terraform later after everything is done
 
 7/8/2026
 - html file is not updated with each Terraform Apply > Need to invalidate manually through AWS Console
