@@ -130,7 +130,7 @@ function renderFretboard() {
     const rootNote = getSelectedRootNote();
     const scale = getSelectedScale();
 
-    const frets = getAllFrets();
+    const frets = document.querySelectorAll("td.fret");
 
     // Ni untuk Toggle btw
     const showNotes = shouldShowNotes();
@@ -146,9 +146,30 @@ function renderFretboard() {
     if (showNotes) {
         fret.textContent = note;
         }
+
+    
     else {
-        fret.textContent = "";
+        // Why check 12th fret first? Sebab kita overlook and tak letak the 12th fret dalam class fret-marker
+        // So bila kita off the toggle, the 12th fret marker dots will also be gone. So we need to check for this first before the else if statement below.
+        if (fret.dataset.fret === "12") {
+            fret.innerHTML = `
+                <div class="double-marker">
+                    <span>●</span>
+                    <span>●</span>
+                </div>
+            `;
+            }
+
+        // Ni untuk marker dots, sebab if tak letak ni, dots will also be gone on off Toggle same as above
+        else if (fret.classList.contains("marker")) {
+            fret.textContent = "●";
         }
+
+        else {
+            fret.textContent = "";
+        }
+
+}
     
     // Bring this back nanti if the if/else doesn't work
     // fret.textContent = note; 
