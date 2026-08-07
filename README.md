@@ -14,6 +14,10 @@ Source for AWS Documentation: https://registry.terraform.io/providers/hashicorp/
 Note for later: 
 - CloudFront invalidation will cost money after 1000 requests. For this project, it will not be an issue > However, will setup CloudWatch notification later on
 
+8/82026
+- Fixed the errors on Javascript file; app.js again after facing errors when adding new functions > Testing
+-  Current issue as of this date, each deployment does not reflect on the CloudFront > Would have to invalidate the cache with every deployment > Will add the invalidation behaviour in Terraform later after everything is done
+
 7/8/2026
 - html file is not updated with each Terraform Apply > Need to invalidate manually through AWS Console
 - Adding behaviour for CloudFront cache invalidation for each time terraform apply is executed
