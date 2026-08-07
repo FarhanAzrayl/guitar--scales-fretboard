@@ -37,7 +37,7 @@ async function loadTunings() {
 
             option.value = tuning.TuningName;
             option.textContent = tuning.TuningName;
-            
+
             select.appendChild(option);
         });
 
@@ -112,6 +112,9 @@ function renderFretboard() {
     const rootNote = getSelectedRootNote();
     const scale = getSelectedScale();
 
+    const frets = getAllFrets();
+
+    console.log(frets);
 
     console.log("Current Selection:", {
     tuning,
@@ -123,6 +126,10 @@ function renderFretboard() {
    // console.log(rootNote);
    // console.log(scale);
 
+}
+
+function getAllFrets() {
+    return document.querySelectorAll(".fret");
 }
 
 
