@@ -132,6 +132,16 @@ function renderFretboard() {
 
     const frets = getAllFrets();
 
+    // This is to loop through all the frets and then populate the note on each fret based on the open note and the fret number
+    // The function is declared below; function getNoteAtFret(openNote, fret)
+    frets.forEach(fret => {
+    const openNote = fret.dataset.openNote;
+    const fretNumber = Number(fret.dataset.fret);
+    const note = getNoteAtFret(openNote, fretNumber);
+    fret.textContent = note;
+
+});
+
     console.log(frets);
 
     console.log("Current Selection:", {
