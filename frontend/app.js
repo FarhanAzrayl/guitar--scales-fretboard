@@ -75,6 +75,11 @@ async function loadScales() {
 
         const response = await fetch(`${API_URL}/scales`);
         const scales = await response.json();
+
+         // Testing to see if Lambda works
+         console.log(scales);
+
+
         const select = document.getElementById("scale-select");
 
         select.innerHTML = "";
@@ -94,6 +99,8 @@ async function loadScales() {
     catch (err) {
         console.error(err);
     }
+
+
 }
 
 
