@@ -141,7 +141,21 @@ function renderFretboard() {
     });
 
     // TESTING NAK TENGOK DEKAT CONSOLE DIA READ AS APA, REMOVE AFTER DONE
+    // console.log(getNoteAtFret("E", 0)); -> Success yesss
     console.log(getNoteAtFret("E", 0));
+    console.log(getNoteAtFret("E", 1));
+    console.log(getNoteAtFret("E", 2));
+    console.log(getNoteAtFret("E", 3));
+    console.log(getNoteAtFret("E", 4));
+    console.log(getNoteAtFret("E", 5));
+    console.log(getNoteAtFret("E", 6));
+    console.log(getNoteAtFret("E", 7));
+    console.log(getNoteAtFret("E", 8));
+    console.log(getNoteAtFret("E", 9));
+    console.log(getNoteAtFret("E", 10));
+    console.log(getNoteAtFret("E", 11));
+    console.log(getNoteAtFret("E", 12));
+
     // TESTING NAK TENGOK DEKAT CONSOLE DIA READ AS APA, REMOVE AFTER DONE
 
    // Previous console log > We make them prettier sikit
@@ -160,7 +174,8 @@ function getAllFrets() {
 function getNoteAtFret(openNote, fret) {
     // indexOf() ni untuk return the index of the note that is on the fret of the open note (note 0) and dia akan compare to the NOTES array yang kita declare dekat atas tu
     const startIndex = NOTES.indexOf(openNote);
-    console.log(startIndex);
+    const noteIndex = (startIndex + fret) % NOTES.length;
+    return NOTES[noteIndex];
 
 }
 
