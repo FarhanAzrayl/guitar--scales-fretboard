@@ -169,6 +169,8 @@ function getNoteAtFret(openNote, fret) {
     const noteIndex = (startIndex + fret) % NOTES.length;
     return NOTES[noteIndex];
 
+    fret.textContent = note;
+
 }
 
 
