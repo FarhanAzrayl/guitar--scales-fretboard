@@ -2,6 +2,23 @@ console.log("app.js loaded");
 
 const API_URL = "https://h95ozcu1tl.execute-api.ap-southeast-1.amazonaws.com";
 
+// Just defining the notes here, so we can use it later for the root note dropdown and also for the fretboard rendering
+
+const NOTES = [
+    "C",
+    "C#",
+    "D",
+    "D#",
+    "E",
+    "F",
+    "F#",
+    "G",
+    "G#",
+    "A",
+    "A#",
+    "B"
+];
+
 
 // Lets mix all into one startup function, much cleaner nanti susah nak organize if buat satu2
 
@@ -152,28 +169,15 @@ function getAllFrets() {
     }
 
 
-function loadRootNotes() {
+ // We are just looping the notes from the Notes dekat atas sekali tu
 
-    const notes = [
-        "C",
-        "C#",
-        "D",
-        "D#",
-        "E",
-        "F",
-        "F#",
-        "G",
-        "G#",
-        "A",
-        "A#",
-        "B"
-    ];
+function loadRootNotes() {
 
     const select = document.getElementById("root-note-select");
 
     select.innerHTML = "";
 
-    notes.forEach(note => {
+    NOTES.forEach(note => {
 
         const option = document.createElement("option");
 
