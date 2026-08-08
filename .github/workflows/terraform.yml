@@ -79,6 +79,12 @@ jobs:
         # Auto approve as of now. Later on if we want to simulate a working environment we tukar to manual approval - Approval from Repo
         run: terraform apply -auto-approve -input=false
 
+      - name: Invalidate CloudFront Cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*"
+
 # Change to defaults.run.working-directory later so tak payah nak declare the directory for each run/action command
 # defaults:
 #   run:
