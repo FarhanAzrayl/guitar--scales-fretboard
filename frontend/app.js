@@ -20,17 +20,6 @@ const NOTES = [
     "B"
 ];
 
-// Ni just untuk load the initial tuning for the fretboard je. Instead of having it empty on first load and we have to select the tuning, this is to load Standard tuning first
-
-const STANDARD_TUNING = [
-    "E",
-    "B",
-    "G",
-    "D",
-    "A",
-    "E"
-];
-
 // loadScales() fetches data from DynamoDB, then put it in here
 let scalesData = [];
 
@@ -47,6 +36,8 @@ async function initializeApp() {
 
     loadOpenStringNotes();
 
+    applyTuningPreset();
+
     addEventListeners();
     renderFretboard();
 
@@ -61,6 +52,7 @@ async function loadTunings() {
     try {
         const response = await fetch(`${API_URL}/tunings`);
         const tunings = await response.json();
+
         const select = document.getElementById("tuning-select");
 
         select.innerHTML = "";
@@ -72,9 +64,19 @@ async function loadTunings() {
             option.value = tuning.TuningName;
             option.textContent = tuning.TuningName;
 
+            // This is what reads the presets that we have from the JSON file in DynamoDB okay
+            option.dataset.notes = JSON.stringify(tuning.Notes);
+
             select.appendChild(option);
         });
 
+        // Make Standard the initial preset
+        const standardOption = Array.from(select.options)
+            .find(option => option.value === "Standard");
+
+        if (standardOption) {
+            select.value = "Standard";
+        }
     }
 
     catch (err) {
@@ -101,9 +103,7 @@ async function loadScales() {
 
 
         const select = document.getElementById("scale-select");
-
         select.innerHTML = "";
-
         scales.forEach(scale => {
 
             const option = document.createElement("option");
@@ -130,8 +130,13 @@ async function loadScales() {
 function addEventListeners() {
 
     document
-        .getElementById("tuning-select")
-        .addEventListener("change", renderFretboard);
+    .getElementById("tuning-select")
+    .addEventListener("change", () => {
+
+        // This one asks to re-render when the preset is selected
+        applyTuningPreset();
+        renderFretboard();
+    });
 
     document
         .getElementById("root-note-select")
@@ -161,6 +166,7 @@ function addEventListeners() {
     document
     .getElementById("highlight-color")
     .addEventListener("input", renderFretboard);
+
 
 }
 
@@ -203,7 +209,7 @@ function renderFretboard() {
     else {
     fret.classList.remove("scale-highlight");
     }
-    
+
     if (showNotes) {
         fret.textContent = note;
         }
@@ -322,21 +328,18 @@ function loadRootNotes() {
 // Initial load will be Standard tuning basically before the drop down basically okeiii
 
 function loadOpenStringNotes() {
+
     const selects = document.querySelectorAll(".open-string-select");
-    selects.forEach((select, index) => {
 
+    selects.forEach(select => {
         NOTES.forEach(note => {
-
             const option = document.createElement("option");
 
             option.value = note;
             option.textContent = note;
 
             select.appendChild(option);
-
         });
-        // Ni ha we tell them to select STANDARD_TUNING kita letak dekat atas tu. Lets not overcomplicate and add another layer of calculation
-        select.value = STANDARD_TUNING[index];
     });
 }
 
@@ -385,4 +388,23 @@ function shouldHighlightScales() {
 // Function for the highlight colour picker
 function getHighlightColor() {
     return document.getElementById("highlight-color").value;
+}
+
+
+// Ni function untuk change the tuning based on the preset drop down selected
+function applyTuningPreset() {
+
+    const tuningSelect = document.getElementById("tuning-select");
+    const selectedOption = tuningSelect.options[tuningSelect.selectedIndex];
+
+    if (!selectedOption || !selectedOption.dataset.notes) {
+        return;
+    }
+
+    const notes = JSON.parse(selectedOption.dataset.notes);
+    const openStringSelects = document.querySelectorAll(".open-string-select");
+
+    openStringSelects.forEach((select, index) => {
+        select.value = notes[index];
+    });
 }
