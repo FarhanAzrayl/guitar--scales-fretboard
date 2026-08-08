@@ -55,6 +55,14 @@ thead th {
     line-height: 0.8;
 }
 
+/* ============================================ */
+/* This one untuk the highlighting of the frets */
+/* =============================================*/
+
+.scale-highlight {
+    background-color: #ffd54f;
+}
+
 /* ==================================== */
 /* This one untuk fret 0 / open strings */
 /* =====================================*/

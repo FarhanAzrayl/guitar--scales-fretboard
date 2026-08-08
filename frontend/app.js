@@ -31,6 +31,9 @@ const STANDARD_TUNING = [
     "E"
 ];
 
+// loadScales() fetches data from DynamoDB, then put it in here
+let scalesData = [];
+
 
 // Lets mix all into one startup function, much cleaner nanti susah nak organize if buat satu2
 
@@ -89,8 +92,12 @@ async function loadScales() {
         const response = await fetch(`${API_URL}/scales`);
         const scales = await response.json();
 
+        // Referring to the ScaleData array dekat atas, that will depend on the information from DynamoDB
+        scalesData = scales;
+        console.log(scalesData);
+
          // Testing to see if Lambda works
-         console.log(scales);
+        console.log(scales);
 
 
         const select = document.getElementById("scale-select");
@@ -145,6 +152,11 @@ function addEventListeners() {
         select.addEventListener("change", renderFretboard);
     });
 
+    // This one is for the highlight toggle. With each action, render. Same as the ones at the above lah
+    document
+    .getElementById("highlight-scales-toggle")
+    .addEventListener("change", renderFretboard);
+
 }
 
 
@@ -164,6 +176,9 @@ function renderFretboard() {
     const showNotes = shouldShowNotes();
     console.log(showNotes);
 
+    const highlightScales = shouldHighlightScales();
+    const scaleNotes = getScaleNotes();
+
     // This is to loop through all the frets and then populate the note on each fret based on the open note and the fret number
     // The function is declared below; function getNoteAtFret(openNote, fret)
     // We have also now added that on the initial render, kita populate with Standard tuning first. We take from the STANDARD_TUNING array table dekat atas
@@ -173,11 +188,18 @@ function renderFretboard() {
     const openNote = openStringNotes[stringNumber - 1];
     const fretNumber = Number(fret.dataset.fret);
     const note = getNoteAtFret(openNote, fretNumber);
+    const isScaleNote = scaleNotes.includes(note);
+
+    if (highlightScales && isScaleNote) {
+        fret.classList.add("scale-highlight");
+    }
+    else {
+        fret.classList.remove("scale-highlight");
+    }
 
     if (showNotes) {
         fret.textContent = note;
         }
-
     
     else {
         // Why check 12th fret first? Sebab kita overlook and tak letak the 12th fret dalam class fret-marker
@@ -200,7 +222,7 @@ function renderFretboard() {
             fret.textContent = "";
         }
 
-}
+    }
     
     // Bring this back nanti if the if/else doesn't work
     // fret.textContent = note; 
@@ -226,13 +248,8 @@ function renderFretboard() {
 
 }
 
-// Just calling all the frets from the html > returned as array
-function getAllFrets() {
-    // Ingat, for note 0 or the open string, the class name we gave is different. Tapi kita dah bagi value on each fret/string. So we use those instead. 
-    // data-string = which string?
-    // data-fret = which fret?
-    return document.querySelectorAll("[data-string][data-fret]");
-}
+// Ni semua helper function for the renderFretboard() function btw. They act as kinda like a module. Treat them as employees that has to do what Renderer wants when Renderer asks for it
+
 
 // Ni function to get the selected open-string notes from the STANDARD_TUNING array table kita buat atas tu
 function getOpenStringNotes() {
@@ -324,4 +341,36 @@ function shouldShowNotes() {
 
     return document.getElementById("show-notes-toggle").checked;
 
+}
+
+// This one fetches from DynamoDB
+// Ni function to fetch the scale intervals from the JSON file in DynamoDB
+function getSelectedScaleIntervals() {
+    const scaleName = getSelectedScale();
+    // scaleName is Major or Minor for example, so if scaeName is Major, get the intervals
+    const scale = scalesData.find(scale => scale.ScaleName === scaleName);
+    if (!scale) {
+        return [];
+    }
+
+    return scale.Intervals;
+}
+
+// This one make the changes using the fetched data from DynamoDB
+// This function is the one that actually bagi the actual notes belonging to the selected scale after we get the Intervals from DynamoDB
+function getScaleNotes() {
+    const rootNote = getSelectedRootNote();
+    const intervals = getSelectedScaleIntervals();
+    const rootIndex = NOTES.indexOf(rootNote);
+
+    return intervals.map(interval => {
+        const noteIndex = (rootIndex + interval) % NOTES.length;
+        return NOTES[noteIndex];
+    });
+}
+
+
+// Function untuk highli8ght the notes when toggled on
+function shouldHighlightScales() {
+    return document.getElementById("highlight-scales-toggle").checked;
 }
