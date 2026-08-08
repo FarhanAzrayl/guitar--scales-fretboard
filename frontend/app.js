@@ -20,6 +20,17 @@ const NOTES = [
     "B"
 ];
 
+// Ni just untuk load the initial tuning for the fretboard je. Instead of having it empty on first load and we have to select the tuning, this is to load Standard tuning first
+
+const STANDARD_TUNING = [
+    "E",
+    "B",
+    "G",
+    "D",
+    "A",
+    "E"
+];
+
 
 // Lets mix all into one startup function, much cleaner nanti susah nak organize if buat satu2
 
@@ -30,6 +41,8 @@ async function initializeApp() {
     await loadScales();
 
     loadRootNotes();
+
+    loadOpenStringNotes();
 
     addEventListeners();
     renderFretboard();
@@ -125,6 +138,13 @@ function addEventListeners() {
         .getElementById("show-notes-toggle")
         .addEventListener("change", renderFretboard);
 
+    // This one is basically telling us that if we Change String 1 punya note? > RENDER FRETBOARD
+    document
+    .querySelectorAll(".open-string-select")
+    .forEach(select => {
+        select.addEventListener("change", renderFretboard);
+    });
+
 }
 
 
@@ -138,6 +158,7 @@ function renderFretboard() {
     const scale = getSelectedScale();
 
     const frets = document.querySelectorAll("td.fret");
+    const openStringNotes = getOpenStringNotes();
 
     // Ni untuk Toggle btw
     const showNotes = shouldShowNotes();
@@ -145,8 +166,11 @@ function renderFretboard() {
 
     // This is to loop through all the frets and then populate the note on each fret based on the open note and the fret number
     // The function is declared below; function getNoteAtFret(openNote, fret)
+    // We have also now added that on the initial render, kita populate with Standard tuning first. We take from the STANDARD_TUNING array table dekat atas
     frets.forEach(fret => {
-    const openNote = fret.dataset.openNote;
+    const stringNumber = Number(fret.dataset.string);
+    // Okay so this one is negative one, sebab dekat HTML kita letak string as 1-6, but arrays starts from 0, so array dia 0-5. Kita match dia gitchew
+    const openNote = openStringNotes[stringNumber - 1];
     const fretNumber = Number(fret.dataset.fret);
     const note = getNoteAtFret(openNote, fretNumber);
 
@@ -210,6 +234,12 @@ function getAllFrets() {
     return document.querySelectorAll("[data-string][data-fret]");
 }
 
+// Ni function to get the selected open-string notes from the STANDARD_TUNING array table kita buat atas tu
+function getOpenStringNotes() {
+    const selects = document.querySelectorAll(".open-string-select");
+    return Array.from(selects).map(select => select.value);
+}
+
 // Ni untuk determine the first note from fret 0, in which will dictate how the notes on the frets of a string will auto-populdate
 function getNoteAtFret(openNote, fret) {
     // indexOf() ni untuk return the index of the note that is on the fret of the open note (note 0) and dia akan compare to the NOTES array yang kita declare dekat atas tu
@@ -262,6 +292,31 @@ function loadRootNotes() {
     });
 
 }
+
+// Ni untuk dropdown Root Notes because we are adding it so each individual strings are editable
+// We are also making this function call the Standard tuning from the global constant dekat atas tu for initial load
+// Initial load will be Standard tuning basically before the drop down basically okeiii
+
+function loadOpenStringNotes() {
+    const selects = document.querySelectorAll(".open-string-select");
+    selects.forEach((select, index) => {
+
+        NOTES.forEach(note => {
+
+            const option = document.createElement("option");
+
+            option.value = note;
+            option.textContent = note;
+
+            select.appendChild(option);
+
+        });
+        // Ni ha we tell them to select STANDARD_TUNING kita letak dekat atas tu. Lets not overcomplicate and add another layer of calculation
+        select.value = STANDARD_TUNING[index];
+    });
+}
+
+
 
 // This one is for the Toggle button
 

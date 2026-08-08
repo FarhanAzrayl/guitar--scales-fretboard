@@ -26,6 +26,9 @@ Note for later:
 - Faced issue after adding more fields and attributes to the DynamoDB table
 - boto3 is unable to read Python integers and changes it to decimal > Added import for decimal-integer in the Python code
 
+Note: 
+- boto3 intentionally converts every DynamoDB Number into a Python Decimal object, hence the need for the import > The importt encoder basically converts any decimals into an int first.
+- Remember to add DecimalEncoder for any AWS projects in the future, it is good practice to do so
 -  Current issue as of this date, each deployment does not reflect on the CloudFront > Would have to invalidate the cache with every deployment > Will add the invalidation behaviour for CloudFront in Terraform later after everything is done
 
 7/8/2026

@@ -34,36 +34,38 @@
     <!-- 3 types of class: Fret = Fret biasa, Fret marker = frets yang ada dots, String label = labels for each string -->
     <!-- data-string = which string? -->
     <!-- data-fret = which fret? -->
-    <!-- data-open-note = what's the open note for this string? -->
+    <!-- We are changing fret 0 to a drop down so that each string is editable for custom tunings. Notes are loaded from const NOTES from app.js -->
 
     <tbody>
         <tr>
-            <td class="string-label" data-string="1"
-                data-fret="0" data-open-note="E">E</td>
+            <td class="string-label" data-string="1" 
+                data-fret="0">
+                <select class="open-string-select" data-string="1"></select>
+            </td>
             <td class="fret" data-string="1" 
-                data-fret="1" data-open-note="E"></td>
+                data-fret="1"></td>
             <td class="fret" data-string="1" 
                 data-fret="2"></td>
             <td class="fret marker" data-string="1" 
-                data-fret="3" data-open-note="E">●</td>
+                data-fret="3">●</td>
             <td class="fret" data-string="1" 
-                data-fret="4" data-open-note="E"></td>
+                data-fret="4"></td>
             <td class="fret marker" data-string="1" 
                 data-fret="5">●</td>
             <td class="fret" data-string="1" 
-                data-fret="6"data-open-note="E"></td>
+                data-fret="6"></td>
             <td class="fret marker" data-string="1" 
-                data-fret="7"data-open-note="E">●</td>
+                data-fret="7">●</td>
             <td class="fret" data-string="1" 
-                data-fret="8" data-open-note="E"></td>
+                data-fret="8"></td>
             <td class="fret marker" data-string="1" 
-                data-fret="9" data-open-note="E">●</td>
+                data-fret="9">●</td>
             <td class="fret" data-string="1" 
-                data-fret="10" data-open-note="E"></td>
+                data-fret="10"></td>
             <td class="fret" data-string="1" 
-            data-fret="11" data-open-note="E"></td>
+            data-fret="11"></td>
             <td class="fret" data-string="1" 
-            data-fret="12" data-open-note="E">
+            data-fret="12">
                 <div class="double-marker">
                     <span>●</span>
                     <span>●</span>
@@ -73,31 +75,33 @@
 
         <tr>
             <td class="string-label" data-string="2" 
-                data-fret="0" data-open-note="B">B</td>
+                data-fret="0" data-open-note="B">
+                <select class="open-string-select" data-string="2"></select>
+            </td>
             <td class="fret" data-string="2" 
-                data-fret="1" data-open-note="B"></td>
+                data-fret="1"></td>
             <td class="fret" data-string="2" 
-                data-fret="2" data-open-note="B"></td>
+                data-fret="2"></td>
             <td class="fret marker" data-string="2" 
-                data-fret="3" data-open-note="B">●</td>
+                data-fret="3">●</td>
             <td class="fret" data-string="2" 
-                data-fret="4" data-open-note="B"></td>
+                data-fret="4"></td>
             <td class="fret marker" data-string="2" 
-                data-fret="5" data-open-note="B">●</td>
+                data-fret="5">●</td>
             <td class="fret" data-string="2" 
-                data-fret="6" data-open-note="B"></td>
+                data-fret="6"></td>
             <td class="fret marker" data-string="2" 
-                data-fret="7" data-open-note="B">●</td>
+                data-fret="7">●</td>
             <td class="fret" data-string="2" 
-                data-fret="8" data-open-note="B"></td>
+                data-fret="8"></td>
             <td class="fret marker" data-string="2" 
-                data-fret="9" data-open-note="B">●</td>
+                data-fret="9">●</td>
             <td class="fret" data-string="2" 
-                data-fret="10" data-open-note="B"></td>
+                data-fret="10"></td>
             <td class="fret" data-string="2" 
-            data-fret="11" data-open-note="B"></td>
+            data-fret="11"></td>
             <td class="fret" data-string="2" 
-            data-fret="12" data-open-note="B">
+            data-fret="12">
                 <div class="double-marker">
                     <span>●</span>
                     <span>●</span>
@@ -107,31 +111,33 @@
 
         <tr>
             <td class="string-label" data-string="3" 
-                data-fret="0" data-open-note="G">G</td>
+                data-fret="0">
+                <select class="open-string-select" data-string="3"></select>
+            </td>
             <td class="fret" data-string="3" 
-                data-fret="1" data-open-note="G"></td>
+                data-fret="1"></td>
             <td class="fret" data-string="3" 
-                data-fret="2" data-open-note="G"></td>
+                data-fret="2"></td>
             <td class="fret marker" data-string="3" 
-                data-fret="3" data-open-note="G">●</td>
+                data-fret="3">●</td>
             <td class="fret" data-string="3" 
-                data-fret="4" data-open-note="G"></td>
+                data-fret="4"></td>
             <td class="fret marker" data-string="3" 
-                data-fret="5" data-open-note="G">●</td>
+                data-fret="5">●</td>
             <td class="fret" data-string="3" 
-                data-fret="6" data-open-note="G"></td>
+                data-fret="6"></td>
             <td class="fret marker" data-string="3" 
-                data-fret="7" data-open-note="G">●</td>
+                data-fret="7">●</td>
             <td class="fret" data-string="3" 
-                data-fret="8" data-open-note="G"></td>
+                data-fret="8"></td>
             <td class="fret marker" data-string="3" 
-                data-fret="9" data-open-note="G">●</td>
+                data-fret="9">●</td>
             <td class="fret" data-string="3" 
-                data-fret="10" data-open-note="G"></td>
+                data-fret="10"></td>
             <td class="fret" data-string="3" 
-            data-fret="11" data-open-note="G"></td>
+            data-fret="11"></td>
             <td class="fret" data-string="3" 
-            data-fret="12" data-open-note="G">
+            data-fret="12">
                 <div class="double-marker">
                     <span>●</span>
                     <span>●</span>
@@ -141,31 +147,33 @@
 
         <tr>
             <td class="string-label" data-string="4" 
-                data-fret="0" data-open-note="D">D</td>
+                data-fret="0">
+                <select class="open-string-select" data-string="4"></select>
+            </td>
             <td class="fret" data-string="4" 
-                data-fret="1" data-open-note="D"></td>
+                data-fret="1"></td>
             <td class="fret" data-string="4" 
-                data-fret="2" data-open-note="D"></td>
+                data-fret="2"></td>
             <td class="fret marker" data-string="4" 
-                data-fret="3" data-open-note="D">●</td>
+                data-fret="3">●</td>
             <td class="fret" data-string="4" 
-                data-fret="4" data-open-note="D"></td>
+                data-fret="4"></td>
             <td class="fret marker" data-string="4" 
-                data-fret="5" data-open-note="D">●</td>
+                data-fret="5">●</td>
             <td class="fret" data-string="4" 
-                data-fret="6" data-open-note="D"></td>
+                data-fret="6"></td>
             <td class="fret marker" data-string="4" 
-                data-fret="7" data-open-note="D">●</td>
+                data-fret="7">●</td>
             <td class="fret" data-string="4" 
-                data-fret="8" data-open-note="D"></td>
+                data-fret="8"></td>
             <td class="fret marker" data-string="4" 
-                data-fret="9" data-open-note="D">●</td>
+                data-fret="9">●</td>
             <td class="fret" data-string="4" 
-                data-fret="10" data-open-note="D"></td>
+                data-fret="10"></td>
             <td class="fret" data-string="4" 
-            data-fret="11" data-open-note="D"></td>
+            data-fret="11"></td>
             <td class="fret" data-string="4" 
-            data-fret="12" data-open-note="D">
+            data-fret="12">
                 <div class="double-marker">
                     <span>●</span>
                     <span>●</span>
@@ -175,31 +183,33 @@
 
         <tr>
             <td class="string-label" data-string="5" 
-                data-fret="0" data-open-note="A">A</td>
+                data-fret="0">
+                <select class="open-string-select" data-string="5"></select>
+            </td>
             <td class="fret" data-string="5" 
-                data-fret="1" data-open-note="A"></td>
+                data-fret="1"></td>
             <td class="fret" data-string="5" 
-                data-fret="2" data-open-note="A"></td>
+                data-fret="2"></td>
             <td class="fret marker" data-string="5" 
-                data-fret="3" data-open-note="A">●</td>
+                data-fret="3">●</td>
             <td class="fret" data-string="5" 
-                data-fret="4" data-open-note="A"></td>
+                data-fret="4"></td>
             <td class="fret marker" data-string="5" 
-                data-fret="5" data-open-note="A">●</td>
+                data-fret="5">●</td>
             <td class="fret" data-string="5" 
-                data-fret="6" data-open-note="A"></td>
+                data-fret="6"></td>
             <td class="fret marker" data-string="5" 
-                data-fret="7" data-open-note="A">●</td>
+                data-fret="7">●</td>
             <td class="fret" data-string="5" 
-                data-fret="8" data-open-note="A"></td>
+                data-fret="8"></td>
             <td class="fret marker" data-string="5" 
-                data-fret="9" data-open-note="A">●</td>
+                data-fret="9">●</td>
             <td class="fret" data-string="5" 
-                data-fret="10" data-open-note="A"></td>
+                data-fret="10"></td>
             <td class="fret" data-string="5" 
-            data-fret="11" data-open-note="A"></td>
+            data-fret="11"></td>
             <td class="fret" data-string="5" 
-            data-fret="12" data-open-note="A">
+            data-fret="12">
                 <div class="double-marker">
                     <span>●</span>
                     <span>●</span>
@@ -209,31 +219,33 @@
 
         <tr>
             <td class="string-label" data-string="6" 
-                data-fret="0" data-open-note="E">E</td>
+                data-fret="0">
+                <select class="open-string-select" data-string="6"></select>
+            </td>
             <td class="fret" data-string="6" 
-                data-fret="1" data-open-note="E"></td>
+                data-fret="1"></td>
             <td class="fret" data-string="6" 
-                data-fret="2" data-open-note="E"></td>
+                data-fret="2"></td>
             <td class="fret marker" data-string="6" 
-                data-fret="3" data-open-note="E">●</td>
+                data-fret="3">●</td>
             <td class="fret" data-string="6" 
-                data-fret="4" data-open-note="E"></td>
+                data-fret="4"></td>
             <td class="fret marker" data-string="6" 
-                data-fret="5" data-open-note="E">●</td>
+                data-fret="5">●</td>
             <td class="fret" data-string="6" 
-                data-fret="6" data-open-note="E"></td>
+                data-fret="6"></td>
             <td class="fret marker" data-string="6" 
-                data-fret="7" data-open-note="E">●</td>
+                data-fret="7">●</td>
             <td class="fret" data-string="6" 
-                data-fret="8" data-open-note="E"></td>
+                data-fret="8"></td>
             <td class="fret marker" data-string="6" 
-                data-fret="9" data-open-note="E">●</td>
+                data-fret="9">●</td>
             <td class="fret" data-string="6" 
-                data-fret="10" data-open-note="E"></td>
+                data-fret="10"></td>
             <td class="fret" data-string="6" 
-            data-fret="11" data-open-note="E"></td>
+            data-fret="11"></td>
             <td class="fret" data-string="6" 
-            data-fret="12" data-open-note="E">
+            data-fret="12">
                 <div class="double-marker">
                     <span>●</span>
                     <span>●</span>
