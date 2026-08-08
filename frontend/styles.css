@@ -1,8 +1,8 @@
 body {
     font-family: Arial, sans-serif;
-    background: #f5f5f5;
-
+    background: #303030;
     padding: 30px;
+    color: #222;
 }
 
 
@@ -207,20 +207,97 @@ thead th {
 }
 
 .scale-note {
-    display: flex;
+    position: relative;
 
+    display: flex;
     align-items: center;
     justify-content: center;
 
-    min-width: 42px;
+    width: 42px;
     height: 42px;
 
+    padding: 0;
+
+    border: none;
     border-radius: 50%;
 
-    background: #f0f0f0;
+    background: var(--note-color);
 
+    font-family: Arial, sans-serif;
+    font-size: 14px;
     font-weight: bold;
+
     color: #333;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s,
+        box-shadow 0.15s;
+}
+
+.scale-note:hover {
+    transform: scale(1.08);
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+/* ==================================== */
+/* This one for scale note colour popup */
+/* ==================================== */
+
+.note-color-popup {
+    position: absolute;
+
+    top: 52px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 100;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 12px;
+
+    min-width: 110px;
+
+    background: #ffffff;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.note-color-popup-title {
+    font-size: 13px;
+    font-weight: bold;
+
+    color: #333;
+}
+
+.note-color-popup input[type="color"] {
+    width: 55px;
+    height: 35px;
+
+    padding: 0;
+
+    border: none;
+
+    cursor: pointer;
+}
+
+#note-color-value {
+    font-size: 11px;
+    color: #777;
 }
 
 /* ==================================== */
@@ -367,7 +444,7 @@ thead th {
     margin: 50px auto 0;
     padding: 30px 25px 15px;
 
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #555;
 
     color: #666;
 }
@@ -379,13 +456,14 @@ thead th {
 }
 
 .footer-content strong {
-    color: #333;
+    color: #fff;
     font-size: 16px;
 }
 
 .footer-content p {
     margin: 5px 0 0;
     font-size: 13px;
+    color: #bbb;
 }
 
 .footer-links {
@@ -394,7 +472,7 @@ thead th {
 }
 
 .footer-links a {
-    color: #444;
+    color: #fff;
     text-decoration: none;
     font-weight: bold;
 }
@@ -409,5 +487,5 @@ thead th {
     text-align: center;
 
     font-size: 12px;
-    color: #888;
+    color: #999;
 }
