@@ -60,7 +60,24 @@ thead th {
 /* =============================================*/
 
 .scale-highlight {
-    background-color: #ffd54f;
+    position: relative;
+    isolation: isolate;
+}
+
+.scale-highlight::before {
+    content: "";
+    position: absolute;
+
+    width: 42px;
+    height: 42px;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+    background-color: var(--highlight-color);
+    border-radius: 50%;
+    z-index: -1;
 }
 
 /* ==================================== */

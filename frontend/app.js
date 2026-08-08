@@ -157,6 +157,11 @@ function addEventListeners() {
     .getElementById("highlight-scales-toggle")
     .addEventListener("change", renderFretboard);
 
+    // Colour picker for the scales
+    document
+    .getElementById("highlight-color")
+    .addEventListener("input", renderFretboard);
+
 }
 
 
@@ -178,6 +183,7 @@ function renderFretboard() {
 
     const highlightScales = shouldHighlightScales();
     const scaleNotes = getScaleNotes();
+    const highlightColor = getHighlightColor();
 
     // This is to loop through all the frets and then populate the note on each fret based on the open note and the fret number
     // The function is declared below; function getNoteAtFret(openNote, fret)
@@ -192,11 +198,12 @@ function renderFretboard() {
 
     if (highlightScales && isScaleNote) {
         fret.classList.add("scale-highlight");
+        fret.style.setProperty("--highlight-color", highlightColor);
     }
     else {
-        fret.classList.remove("scale-highlight");
+    fret.classList.remove("scale-highlight");
     }
-
+    
     if (showNotes) {
         fret.textContent = note;
         }
@@ -373,4 +380,9 @@ function getScaleNotes() {
 // Function untuk highli8ght the notes when toggled on
 function shouldHighlightScales() {
     return document.getElementById("highlight-scales-toggle").checked;
+}
+
+// Function for the highlight colour picker
+function getHighlightColor() {
+    return document.getElementById("highlight-color").value;
 }
