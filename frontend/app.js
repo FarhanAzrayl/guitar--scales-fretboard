@@ -179,19 +179,7 @@ function addEventListeners() {
     document
     .getElementById("highlight-scales-toggle")
     .addEventListener("change", renderFretboard);
-
-    // This one untuk click event for the scale notes punya colour picker popup tu
-    document.addEventListener("click", event => {
-
-    if (
-        !event.target.closest(".scale-note") &&
-        !event.target.closest(".note-color-popup")
-    ) {
-        closeNoteColorPicker();
-    }
-
-});
-
+    
 
 }
 
@@ -459,6 +447,12 @@ function updateScaleNotesDisplay(scaleNotes) {
 
     scaleNotes.forEach(note => {
 
+        // Wrapper for the note and its colour popup
+        const wrapper = document.createElement("div");
+
+        wrapper.className = "scale-note-wrapper";
+
+        // The actual scale note button
         const noteElement = document.createElement("button");
 
         noteElement.className = "scale-note";
@@ -469,15 +463,18 @@ function updateScaleNotesDisplay(scaleNotes) {
             noteColors[note]
         );
 
-        noteElement.addEventListener("click", () => {
-            openNoteColorPicker(note, noteElement);
+        noteElement.addEventListener("click", event => {
+            event.stopPropagation();
+            openNoteColorPicker(note, wrapper);
+
         });
-        display.appendChild(noteElement);
+        wrapper.appendChild(noteElement);
+        display.appendChild(wrapper);
     });
 }
 
 // Function ni untuk the button yang untuk colour picker
-function openNoteColorPicker(note, noteElement) {
+function openNoteColorPicker(note, wrapper) {
 
     closeNoteColorPicker();
 
@@ -494,40 +491,39 @@ function openNoteColorPicker(note, noteElement) {
         <input
             type="color"
             id="note-color-input"
-            value="${noteColors[note]}">
+            value="${noteColors[note]}"
+        >
 
         <span id="note-color-value">
             ${noteColors[note]}
         </span>
     `;
 
-    noteElement.parentElement.appendChild(popup);
+    wrapper.appendChild(popup);
 
-    const colorInput = popup.querySelector("#note-color-input");
-    const colorValue = popup.querySelector("#note-color-value");
+    const colorInput =
+        popup.querySelector("#note-color-input");
+
+    const colorValue =
+        popup.querySelector("#note-color-value");
 
     colorInput.addEventListener("input", () => {
 
         noteColors[note] = colorInput.value;
+
+        colorValue.textContent =
+            colorInput.value;
+
+        // Update the button immediately
+        const noteElement =
+            wrapper.querySelector(".scale-note");
 
         noteElement.style.setProperty(
             "--note-color",
             colorInput.value
         );
 
-        colorValue.textContent = colorInput.value;
+        // Update the fretboard terus
         renderFretboard();
     });
-}
-
-// Untuk popup colour picker atas ni
-function closeNoteColorPicker() {
-
-    const existingPopup =
-        document.getElementById("note-color-popup");
-
-    if (existingPopup) {
-        existingPopup.remove();
-    }
-
 }

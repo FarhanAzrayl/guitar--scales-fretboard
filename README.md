@@ -7,6 +7,8 @@ Functionality Goals to achieve:
 - Change the tuning on each string to enable custom tunings while still highlighting the notes within a scale
 - Admin Role - to add additional scales in the future, and also custom tuning presets if desired
 
+Live Demo: https://d1hlg16pug3eiu.cloudfront.net/
+
 Source for AWS Documentation: https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 GitHub Documentation: https://docs.github.com/en/actions/reference/security/oidc
 - That resolves the OIDC issue. GitHub has recently changed the path for repos that are created from 15th of July 2026 onwards
@@ -17,6 +19,11 @@ Next Addition/Action:
 - Add Admin page to enable CRUD for the tunings and scales data
 - Add option to highlight the notes within a scale with different distinctive colours
 - Add metronome
+
+9/8/2026
+- Changing the architecture a little in the HTML and added a function to call the initial tuning on initial load to display standard tuning from Javascript instead of hard coding, and added functionality so that the open strings are editable for custom tunings
+- Testing the highlight function
+- Added the functionality of the tuning preset > Testing
 
 8/82026
 - Fixed the errors on Javascript file; app.js again after facing errors when adding new functions > Testing
@@ -29,14 +36,12 @@ Next Addition/Action:
 - Fixed the issue where the initial tuning notes, dot markers, and 12th notes double markers are gone when toggled off > Testing
 - Faced issue after adding more fields and attributes to the DynamoDB table
 - boto3 is unable to read Python integers and changes it to decimal > Added import for decimal-integer in the Python code
-- Changing the architecture a little in the HTML and added a function to call the initial tuning on initial load to display standard tuning from Javascript instead of hard coding, and added functionality so that the open strings are editable for custom tunings
-- Testing the highlight function
-- Added the functionality of the tuning preset > Testing
 
 Note: 
 - boto3 intentionally converts every DynamoDB Number into a Python Decimal object, hence the need for the import > The importt encoder basically converts any decimals into an int first.
 - Remember to add DecimalEncoder for any AWS projects in the future, it is good practice to do so
 -  Current issue as of this date, each deployment does not reflect on the CloudFront > Would have to invalidate the cache with every deployment > Will add the invalidation behaviour for CloudFront in Terraform later after everything is done
+
 
 7/8/2026
 - html file is not updated with each Terraform Apply > Need to invalidate manually through AWS Console
