@@ -25,6 +25,7 @@ Note for later:
 - Fixed the issue where the initial tuning notes, dot markers, and 12th notes double markers are gone when toggled off > Testing
 - Faced issue after adding more fields and attributes to the DynamoDB table
 - boto3 is unable to read Python integers and changes it to decimal > Added import for decimal-integer in the Python code
+- Changing the architecture a little in the HTML and added a function to call the initial tuning on initial load to display standard tuning from Javascript instead of hard coding, and added functionality so that the open strings are editable for custom tunings
 
 Note: 
 - boto3 intentionally converts every DynamoDB Number into a Python Decimal object, hence the need for the import > The importt encoder basically converts any decimals into an int first.
