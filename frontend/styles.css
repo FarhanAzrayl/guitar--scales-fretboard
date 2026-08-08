@@ -5,6 +5,64 @@ body {
     padding: 30px;
 }
 
+
+/* ========================= */
+/* This one untuk the header */
+/* ========================= */
+
+.site-header {
+    margin-bottom: 25px;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 20px 25px;
+
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.header-title h1 {
+    margin: 0;
+    font-size: 30px;
+    color: #333;
+}
+
+.header-title p {
+    margin: 5px 0 0;
+    color: #666;
+    font-size: 15px;
+}
+
+.github-button {
+    padding: 10px 18px;
+
+    background: #333;
+    color: #fff;
+
+    text-decoration: none;
+    border-radius: 6px;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+.github-button:hover {
+    background: #555;
+}
+
+/* =================================== */
+/* This one untuk the fretboard itself */
+/* =================================== */
+
 table {
     border-collapse: collapse;
     margin: auto;
@@ -55,6 +113,34 @@ thead th {
     line-height: 0.8;
 }
 
+
+/* ================================================= */
+/* This one untuk the fretboard SECTION punya styles */
+/* ================================================= */
+
+.fretboard-section {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.fretboard-section h2 {
+    margin-bottom: 5px;
+    text-align: center;
+    color: #333;
+}
+
+.section-description {
+    margin-top: 0;
+    margin-bottom: 20px;
+
+    text-align: center;
+
+    color: #666;
+    font-size: 14px;
+}
+
+
+
 /* ============================================ */
 /* This one untuk the highlighting of the frets */
 /* =============================================*/
@@ -78,6 +164,63 @@ thead th {
     background-color: var(--highlight-color);
     border-radius: 50%;
     z-index: -1;
+}
+
+
+/* ====================================================================== */
+/* This one yang display notes within a scale under the highlight section */
+/* ====================================================================== */
+
+.scale-output {
+    width: fit-content;
+    min-width: 350px;
+
+    margin: 30px auto;
+
+    padding: 20px 30px;
+
+    background: #ffffff;
+
+    border: 1px solid #ddd;
+    border-radius: 10px;
+
+    text-align: center;
+}
+
+.scale-output h2 {
+    margin: 0;
+    color: #333;
+}
+
+.scale-output-description {
+    margin: 6px 0 18px;
+
+    color: #777;
+    font-size: 14px;
+}
+
+.scale-notes-display {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.scale-note {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background: #f0f0f0;
+
+    font-weight: bold;
+    color: #333;
 }
 
 /* ==================================== */
@@ -168,4 +311,103 @@ thead th {
 
 .toggle input:checked + .slider::before {
     transform: translateX(24px);
+}
+
+
+/* ====================================== */
+/* Technology / Cloud Engineering Section */
+/* ====================================== */
+
+.technology-section {
+    max-width: 1200px;
+    margin: 0 auto 30px;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    padding: 14px 20px;
+
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.technology-label {
+    font-weight: bold;
+    color: #444;
+    white-space: nowrap;
+}
+
+.technology-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.technology-list span {
+    padding: 5px 10px;
+
+    background: #f0f0f0;
+    border-radius: 5px;
+
+    font-size: 13px;
+    color: #555;
+}
+
+
+
+/* ============================ */
+/* Ni untuk Footer punya styles */
+/* ============================ */
+
+.site-footer {
+    max-width: 1200px;
+
+    margin: 50px auto 0;
+    padding: 30px 25px 15px;
+
+    border-top: 1px solid #ddd;
+
+    color: #666;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.footer-content strong {
+    color: #333;
+    font-size: 16px;
+}
+
+.footer-content p {
+    margin: 5px 0 0;
+    font-size: 13px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-links a {
+    color: #444;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    margin-top: 25px;
+
+    text-align: center;
+
+    font-size: 12px;
+    color: #888;
 }

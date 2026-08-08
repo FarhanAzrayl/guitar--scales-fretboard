@@ -9,6 +9,56 @@
 
 <body>
 
+
+<header class="site-header">
+
+    <div class="header-content">
+
+        <div class="header-title">
+            <h1>Guitar Fretboard</h1>
+            <p>Interactive Guitar Scale & Fretboard Visualizer</p>
+        </div>
+
+        <a
+            class="github-button"
+            href="https://github.com/FarhanAzrayl/guitar--scales-fretboard"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            View on GitHub
+        </a>
+
+    </div>
+
+</header>
+
+<section class="technology-section">
+
+    <span class="technology-label">Built with</span>
+
+    <div class="technology-list">
+        <span>AWS</span>
+        <span>Terraform</span>
+        <span>CI/CD: GitHub Actions</span>
+        <span>JavaScript</span>
+        <span>Amazon DynamoDB</span>
+        <span>AWS Lambda</span>
+        <span>API Gateway</span>
+        <span>CloudFront</span>
+    </div>
+
+</section>
+
+<main>
+
+<section class="fretboard-section">
+
+        <h2>Interactive Fretboard</h2>
+
+        <p class="section-description">
+            Select a tuning, root note and scale to explore the fretboard.
+        </p>
+
 <table>
 
     <thead>
@@ -254,6 +304,7 @@
         </tr>
     </tbody>
 </table>
+</section>
 
 <div class="controls">
 
@@ -320,16 +371,67 @@
         type="color"
         id="highlight-color"
         value="#ffd54f"
-        title="Choose highlight colour"
-    >
+        title="Choose highlight colour">
+    </div>
+
+<div class="scale-output">
+
+    <h2>Scale Notes</h2>
+
+    <p class="scale-output-description">
+        Notes contained in the selected scale.
+    </p>
+
+    <div id="scale-notes-display" class="scale-notes-display">
+        Loading...
+    </div>
 
 </div>
-
-
 
 </div>
 
 <script src="app.js"></script>
+
+
+<footer class="site-footer">
+
+    <div class="footer-content">
+
+        <div>
+            <strong>Guitar Fretboard</strong>
+            <p>
+                A cloud-hosted interactive guitar scale visualizer.
+            </p>
+        </div>
+
+        <div class="footer-links">
+
+            <a
+                href="https://github.com/FarhanAzrayl/guitar--scales-fretboard"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                GitHub
+            </a>
+
+            <a
+                href="https://www.linkedin.com/in/farhan-azrayl-zailani/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                LinkedIn
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 Farhan Azrayl · Built with AWS, Terraform and GitHub Actions
+    </div>
+
+</footer>
+
 
 </body>
 </html>

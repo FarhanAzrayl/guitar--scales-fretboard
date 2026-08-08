@@ -236,11 +236,10 @@ function renderFretboard() {
         }
 
     }
-    
-    // Bring this back nanti if the if/else doesn't work
-    // fret.textContent = note; 
 
-});
+    });
+
+    updateScaleNotesDisplay(scaleNotes);
 
     console.log(frets);
 
@@ -406,5 +405,34 @@ function applyTuningPreset() {
 
     openStringSelects.forEach((select, index) => {
         select.value = notes[index];
+    });
+}
+
+// This is just the function to display the Notes within a Scale selected
+function getScaleNotes() {
+    const rootNote = getSelectedRootNote();
+    const intervals = getSelectedScaleIntervals();
+    const rootIndex = NOTES.indexOf(rootNote);
+
+    return intervals.map(interval => {
+        const noteIndex = (rootIndex + interval) % NOTES.length;
+        return NOTES[noteIndex];
+    });
+}
+
+// Function that updates the display of the notes within the scale as per the one atas ni
+function updateScaleNotesDisplay(scaleNotes) {
+    const display = document.getElementById("scale-notes-display");
+    if (!display) {
+        return;
+    }
+
+    display.innerHTML = "";
+
+    scaleNotes.forEach(note => {
+        const noteElement = document.createElement("span");
+        noteElement.className = "scale-note";
+        noteElement.textContent = note;
+        display.appendChild(noteElement);
     });
 }

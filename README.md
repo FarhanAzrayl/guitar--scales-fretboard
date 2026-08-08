@@ -7,12 +7,16 @@ Functionality Goals to achieve:
 - Change the tuning on each string to enable custom tunings while still highlighting the notes within a scale
 - Admin Role - to add additional scales in the future, and also custom tuning presets if desired
 
-Reasons for not using Javascript is to solidify the usage of cloud services already learned and to improve upon it.
-
 Source for AWS Documentation: https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+GitHub Documentation: https://docs.github.com/en/actions/reference/security/oidc
+- That resolves the OIDC issue. GitHub has recently changed the path for repos that are created from 15th of July 2026 onwards
 
-Note for later: 
+Next Addition/Action: 
 - CloudFront invalidation will cost money after 1000 requests. For this project, it will not be an issue > However, will setup CloudWatch notification later on
+- Add Route 53 and ACM for REST API's and domain
+- Add Admin page to enable CRUD for the tunings and scales data
+- Add option to highlight the notes within a scale with different distinctive colours
+- Add metronome
 
 8/82026
 - Fixed the errors on Javascript file; app.js again after facing errors when adding new functions > Testing
@@ -27,6 +31,7 @@ Note for later:
 - boto3 is unable to read Python integers and changes it to decimal > Added import for decimal-integer in the Python code
 - Changing the architecture a little in the HTML and added a function to call the initial tuning on initial load to display standard tuning from Javascript instead of hard coding, and added functionality so that the open strings are editable for custom tunings
 - Testing the highlight function
+- Added the functionality of the tuning preset > Testing
 
 Note: 
 - boto3 intentionally converts every DynamoDB Number into a Python Decimal object, hence the need for the import > The importt encoder basically converts any decimals into an int first.
@@ -85,19 +90,19 @@ Note:
 23/7/2026:
 - Had to create a new module for the S3 bucket policy, because of a circular dependancy issue and after troubleshooting, the current module responsibilities:
 
-S3 Module
-Bucket
-Versioning
-Encryption
-Ownership Controls
-Public Access Block
+- S3 Module
+- Bucket
+- Versioning
+- Encryption
+- Ownership Controls
+- Public Access Block
 
 
-CloudFront Module
-Distribution
-OAC
-Cache Behavior
+- CloudFront Module
+- Distribution
+- OAC
+- Cache Behavior
 
-S3 Bucket Policy Module
-Generating IAM policy
-Attaching policy
+- S3 Bucket Policy Module
+- Generating IAM policy
+- Attaching policy
