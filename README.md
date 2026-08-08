@@ -24,6 +24,7 @@ Next Addition/Action:
 - Changing the architecture a little in the HTML and added a function to call the initial tuning on initial load to display standard tuning from Javascript instead of hard coding, and added functionality so that the open strings are editable for custom tunings
 - Testing the highlight function
 - Added the functionality of the tuning preset > Testing
+- Fixed colour and buttobn issues after amending CSS
 
 8/82026
 - Fixed the errors on Javascript file; app.js again after facing errors when adding new functions > Testing

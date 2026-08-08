@@ -175,34 +175,49 @@ function addEventListeners() {
         select.addEventListener("change", renderFretboard);
     });
 
-    // This one is for the highlight toggle. With each action, render. Same as the ones at the above lah
-    document
-        .getElementById("highlight-scales-toggle")
-        .addEventListener("change", renderFretboard);
 
-    document
-        .getElementById("highlight-scale-toggle")
-        .addEventListener("change", renderFretboard);
-
-    document
-        .getElementById("scale-highlight-color")
-        .addEventListener("input", renderFretboard);
-
+    // This one handles highlighting of the scales with one colour
     document
         .getElementById("highlight-scale-toggle")
         .addEventListener("change", () => {
 
-        const scaleToggle =
-            document.getElementById("highlight-scale-toggle");
+            const scaleToggle =
+                document.getElementById("highlight-scale-toggle");
 
-        const noteToggle =
-            document.getElementById("highlight-scales-toggle");
+            const noteToggle =
+                document.getElementById("highlight-notes-toggle");
 
-        if (scaleToggle.checked) {
+            if (scaleToggle.checked) {
             noteToggle.checked = false;
-        }
-        renderFretboard();
+            }
+
+            renderFretboard();
     });
+
+    // This one handles highlighting of scale for each notes within scale
+    document
+        .getElementById("highlight-notes-toggle")
+        .addEventListener("change", () => {
+
+            const noteToggle =
+                document.getElementById("highlight-notes-toggle");
+
+            const scaleToggle =
+                document.getElementById("highlight-scale-toggle");
+
+            if (noteToggle.checked) {
+                scaleToggle.checked = false;
+            }
+
+            renderFretboard();
+    });
+
+    // This one is for the highlight toggle. With each action, render. Same as the ones at the above lah
+    document
+        .getElementById("scale-highlight-color")
+        .addEventListener("input", renderFretboard);
+
+    // If need to add more, add here
 
 }
 
@@ -223,7 +238,8 @@ function renderFretboard() {
     const showNotes = shouldShowNotes();
     console.log(showNotes);
 
-    const highlightScales = shouldHighlightScales();
+    const highlightNotes = shouldHighlightNotes();
+    const highlightScale = shouldHighlightScale();
     const scaleNotes = getScaleNotes();
     const scaleHighlightColor = getScaleHighlightColor();
 
@@ -421,6 +437,7 @@ function getSelectedScaleIntervals() {
 
 // This one make the changes using the fetched data from DynamoDB
 // This function is the one that actually bagi the actual notes belonging to the selected scale after we get the Intervals from DynamoDB
+// This is just the function to display the Notes within a Scale selected
 function getScaleNotes() {
     const rootNote = getSelectedRootNote();
     const intervals = getSelectedScaleIntervals();
@@ -434,8 +451,8 @@ function getScaleNotes() {
 
 
 // Function untuk highli8ght the notes when toggled on
-function shouldHighlightScales() {
-    return document.getElementById("highlight-scales-toggle").checked;
+function shouldHighlightNotes() {
+    return document.getElementById("highlight-notes-toggle").checked;
 }
 
 // Function for the highlight colour picker
@@ -457,18 +474,6 @@ function applyTuningPreset() {
 
     openStringSelects.forEach((select, index) => {
         select.value = notes[index];
-    });
-}
-
-// This is just the function to display the Notes within a Scale selected
-function getScaleNotes() {
-    const rootNote = getSelectedRootNote();
-    const intervals = getSelectedScaleIntervals();
-    const rootIndex = NOTES.indexOf(rootNote);
-
-    return intervals.map(interval => {
-        const noteIndex = (rootIndex + interval) % NOTES.length;
-        return NOTES[noteIndex];
     });
 }
 
