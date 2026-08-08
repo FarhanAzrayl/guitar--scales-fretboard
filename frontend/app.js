@@ -170,16 +170,39 @@ function addEventListeners() {
 
     // This one is basically telling us that if we Change String 1 punya note? > RENDER FRETBOARD
     document
-    .querySelectorAll(".open-string-select")
-    .forEach(select => {
+        .querySelectorAll(".open-string-select")
+        .forEach(select => {
         select.addEventListener("change", renderFretboard);
     });
 
     // This one is for the highlight toggle. With each action, render. Same as the ones at the above lah
     document
-    .getElementById("highlight-scales-toggle")
-    .addEventListener("change", renderFretboard);
-    
+        .getElementById("highlight-scales-toggle")
+        .addEventListener("change", renderFretboard);
+
+    document
+        .getElementById("highlight-scale-toggle")
+        .addEventListener("change", renderFretboard);
+
+    document
+        .getElementById("scale-highlight-color")
+        .addEventListener("input", renderFretboard);
+
+    document
+        .getElementById("highlight-scale-toggle")
+        .addEventListener("change", () => {
+
+        const scaleToggle =
+            document.getElementById("highlight-scale-toggle");
+
+        const noteToggle =
+            document.getElementById("highlight-scales-toggle");
+
+        if (scaleToggle.checked) {
+            noteToggle.checked = false;
+        }
+        renderFretboard();
+    });
 
 }
 
@@ -202,6 +225,7 @@ function renderFretboard() {
 
     const highlightScales = shouldHighlightScales();
     const scaleNotes = getScaleNotes();
+    const scaleHighlightColor = getScaleHighlightColor();
 
     // This is to loop through all the frets and then populate the note on each fret based on the open note and the fret number
     // The function is declared below; function getNoteAtFret(openNote, fret)
@@ -214,17 +238,31 @@ function renderFretboard() {
     const note = getNoteAtFret(openNote, fretNumber);
     const isScaleNote = scaleNotes.includes(note);
 
-    if (highlightScales && isScaleNote) {
+    if (highlightNotes && isScaleNote) {
+
         fret.classList.add("scale-highlight");
+
         fret.style.setProperty(
-        "--highlight-color",
-        noteColors[note]
+            "--highlight-color",
+            noteColors[note]
+    );
+
+    }
+
+    else if (highlightScale && isScaleNote) {
+
+        fret.classList.add("scale-highlight");
+
+        fret.style.setProperty(
+            "--highlight-color",
+            scaleHighlightColor
         );
     }
 
     else {
-    fret.classList.remove("scale-highlight");
+        fret.classList.remove("scale-highlight");
     }
+
 
     if (showNotes) {
         fret.textContent = note;
@@ -444,30 +482,25 @@ function updateScaleNotesDisplay(scaleNotes) {
     }
 
     display.innerHTML = "";
-
+    
     scaleNotes.forEach(note => {
 
-        // Wrapper for the note and its colour popup
         const wrapper = document.createElement("div");
-
         wrapper.className = "scale-note-wrapper";
 
-        // The actual scale note button
         const noteElement = document.createElement("button");
 
         noteElement.className = "scale-note";
         noteElement.textContent = note;
 
-        noteElement.style.setProperty(
-            "--note-color",
-            noteColors[note]
-        );
+        noteElement.style.backgroundColor = noteColors[note];
 
         noteElement.addEventListener("click", event => {
             event.stopPropagation();
             openNoteColorPicker(note, wrapper);
 
         });
+
         wrapper.appendChild(noteElement);
         display.appendChild(wrapper);
     });
@@ -476,6 +509,7 @@ function updateScaleNotesDisplay(scaleNotes) {
 // Function ni untuk the button yang untuk colour picker
 function openNoteColorPicker(note, wrapper) {
 
+    // Remove an existing popup first
     closeNoteColorPicker();
 
     const popup = document.createElement("div");
@@ -490,40 +524,59 @@ function openNoteColorPicker(note, wrapper) {
 
         <input
             type="color"
-            id="note-color-input"
+            class="note-color-input"
             value="${noteColors[note]}"
         >
 
-        <span id="note-color-value">
+        <span class="note-color-value">
             ${noteColors[note]}
         </span>
     `;
 
     wrapper.appendChild(popup);
 
-    const colorInput =
-        popup.querySelector("#note-color-input");
+        const colorInput =
+        popup.querySelector(".note-color-input");
 
-    const colorValue =
-        popup.querySelector("#note-color-value");
+        const colorValue =
+        popup.querySelector(".note-color-value");
 
-    colorInput.addEventListener("input", () => {
+        colorInput.addEventListener("input", event => {
 
-        noteColors[note] = colorInput.value;
+        const newColor = event.target.value;
 
-        colorValue.textContent =
-            colorInput.value;
+        noteColors[note] = newColor;
+        colorValue.textContent = newColor;
 
-        // Update the button immediately
         const noteElement =
             wrapper.querySelector(".scale-note");
 
-        noteElement.style.setProperty(
-            "--note-color",
-            colorInput.value
-        );
+        noteElement.style.backgroundColor = newColor;
 
         // Update the fretboard terus
         renderFretboard();
     });
+}
+
+
+function closeNoteColorPicker() {
+    const popup =
+        document.getElementById("note-color-popup");
+
+    if (popup) {
+        popup.remove();
+    }
+}
+
+// Function to highlight scales with the same colour
+function shouldHighlightScale() {
+    return document
+        .getElementById("highlight-scale-toggle")
+        .checked;
+}
+
+function getScaleHighlightColor() {
+    return document
+        .getElementById("scale-highlight-color")
+        .value;
 }
