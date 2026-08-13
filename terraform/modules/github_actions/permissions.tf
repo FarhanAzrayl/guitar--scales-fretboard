@@ -62,6 +62,23 @@ data "aws_iam_policy_document" "github_actions_permissions" {
     resources = ["*"]
   }
 
+  # This is for GitHub's ACM Access
+  statement {
+  effect = "Allow"
+
+  actions = [
+    "acm:DescribeCertificate",
+    "acm:ListCertificates",
+    "acm:RequestCertificate",
+    "acm:DeleteCertificate",
+    "acm:AddTagsToCertificate",
+    "acm:RemoveTagsFromCertificate"
+  ]
+
+  resources = ["*"]
+  }
+  
+
   # This is for GitHub's CloudWatch Access
   statement {
     sid    = "CloudWatchLogsAccess"

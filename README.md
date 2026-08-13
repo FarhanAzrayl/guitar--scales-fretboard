@@ -15,10 +15,11 @@ GitHub Documentation: https://docs.github.com/en/actions/reference/security/oidc
 
 Next Addition/Action: 
 - CloudFront invalidation will cost money after 1000 requests. For this project, it will not be an issue > However, will setup CloudWatch notification later on
-- Add Route 53 and ACM for REST API's and domain
 - Add Admin page to enable CRUD for the tunings and scales data
-- Add option to highlight the notes within a scale with different distinctive colours
 - Add metronome
+
+14/8/2026
+- Added Domains through ACM and CloudFlare. Added to Cloudfront module and edited main to include the certificate from ACM
 
 9/8/2026
 - Changing the architecture a little in the HTML and added a function to call the initial tuning on initial load to display standard tuning from Javascript instead of hard coding, and added functionality so that the open strings are editable for custom tunings
