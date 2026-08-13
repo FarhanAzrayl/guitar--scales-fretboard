@@ -21,6 +21,7 @@ module "s3" {
 }
 
 # Connecting the Domain that was purchased and already setup in ACN via Console
+# Remember that we are using an existing ACM, so we need to run it first before final testing so that Terraform won't look for an "existing" ACM as per we declare and point on the module
 
 module "acm" {
   source = "../../modules/acm"
