@@ -1,7 +1,7 @@
 # guitar--scales-fretboard
 Guitar Fretboard featuring notes, scales and visual indicators for learning. This project is to assist in solidifying my understanding of a potential team-oriented workflow, and while doing that to also learn musical and guitar scales as I am a guitar player and would like to improve myself. The project is aimed to hit two birds with one stone, mixing practical working knowledge and hobby related knowledge.
 
-## Live Demo:
+## Live Demo
 
 **Website:**  
 https://guitar-fretboard.com/
