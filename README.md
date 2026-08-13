@@ -1,30 +1,208 @@
 # guitar--scales-fretboard
 Guitar Fretboard featuring notes, scales and visual indicators for learning. This project is to assist in solidifying my understanding of a potential team-oriented workflow, and while doing that to also learn musical and guitar scales as I am a guitar player and would like to improve myself. The project is aimed to hit two birds with one stone, mixing practical working knowledge and hobby related knowledge.
 
-Functionality Goals to achieve:
+## Live Demo:
+
+**Website:**  
+https://guitar-fretboard.com/
+
+**Source Code:**  
+https://github.com/FarhanAzrayl/guitar--scales-fretboard
+
+# Project Overview
+
+Goals to the project:
 - Dispaly guitar fretboard; toggle between an empty fretboard and a note-filled fretboard
 - Choose a root note and a desired scale, and a highlighted guitar fretboard in accordance with the choice
 - Change the tuning on each string to enable custom tunings while still highlighting the notes within a scale
 - Admin Role - to add additional scales in the future, and also custom tuning presets if desired
+- Display metronome and to toggle it on and off, also the tempo could be selected
+- Display customized highlighted notes for example an Arpeggio; 1st, 3rd and 5th notes
 
-Live Demo: https://d1hlg16pug3eiu.cloudfront.net/
+The application is deployed using AWS and managed through Terraform.
+
+The infrastructure is designed around a serverless architecture to minimize operational overhead and keep the cost appropriate for a personal project.
+
+The deployment so far includes:
+
+- Amazon S3
+- Amazon CloudFront
+- CloudFront Origin Access Control (OAC)
+- AWS Certificate Manager (ACM)
+- Amazon API Gateway
+- AWS Lambda
+- Amazon DynamoDB
+- AWS IAM
+- GitHub Actions
+- GitHub Actions OIDC
+- Cloudflare DNS
+- Terraform
+
+# Improvements / Future Development Goals for the Project
+
+- Admin page for managing scales
+- Admin page for managing tuning presets
+- CRUD functionality for DynamoDB data
+- Add a Metronome functionality
+- Customized highlighting of selected scale notes to display 1st, 3rd and 5th notes for Arpeggios for example
+- CloudWatch notifications for monitoring
+
+# Architecture Diagram
+
+![Guitar Fretboard AWS Architecture](./docs/architecture.png)
+
+# Technologies
+
++ Programming / Configuration
+- HTML5
+- CSS3
+- JavaScript
+- Python
+- Terraform (HCL)
+
++ Development Tools
+- Visual Studio Code
+- Git
+- GitHub
+- GitHub Actions
+- AWS CLI
+- Git Bash
+
++ Cloud / Infrastructure
+- Amazon S3
+- Amazon CloudFront
+- AWS Certificate Manager (ACM)
+- Amazon API Gateway
+- AWS Lambda
+- Amazon DynamoDB
+- AWS IAM
+- AWS STS
+- Cloudflare DNS
+
+# Infrastructure as Code
+
+The infrastructure is managed using Terraform rather than being manually configured through the AWS Console.
+
+Terraform is structured into reusable modules for the different components of the application.
+
++ Current modules include:
+- S3
+- CloudFront
+- S3 Bucket Policy
+- ACM
+- API Gateway
+- Lambda
+- Lambda Permissions
+- DynamoDB - Scales
+- DynamoDB - Tunings
+- GitHub Actions / IAM
+- Bootstrap infrastructure
+
++ Current Terraform resources include:
+- Amazon S3
+- S3 Bucket
+- Bucket Versioning
+- Server-side Encryption
+- Bucket Ownership Controls
+- Public Access Configuration
+- S3 Objects
+
++ Amazon CloudFront
+- CloudFront Distribution
+- CloudFront Origin Access Control (OAC)
+- Cache Behavior
+- HTTPS configuration
+- Custom Domain
+- CloudFront Cache Invalidation
+
++ AWS Certificate Manager
+- ACM Certificate
+- guitar-fretboard.com
+- *.guitar-fretboard.com
+- DNS validation
+
+The ACM certificate is provisioned in us-east-1 for use with CloudFront.
+
++ Amazon API Gateway
+- API Gateway HTTP API
+- /scales
+- /tunings
+- Lambda integration
+- CORS configuration
+
++ AWS Lambda
+- Python Lambda function
+- IAM execution role
+- DynamoDB permissions
+- CloudWatch logging permissions
+
++ Amazon DynamoDB
+- Scales table
+- Tunings table
+
++ AWS IAM
+- Lambda execution role
+- Lambda policies
+- GitHub Actions deployment role
+- GitHub Actions deployment policy
+- GitHub OIDC trust configuration
+
+# CI/CD
+
+GitHub Actions is used to automate infrastructure deployment.
+
+The deployment workflow performs Terraform operations and then invalidates the CloudFront cache after deployment.
+
+![Guitar Fretboard CI/CD Pipeline](./docs/cicd-pipeline.png)
+
+AWS credentials are not stored as long-lived AWS access keys in GitHub.
+
+Instead, GitHub Actions authenticates to AWS using GitHub's OIDC provider and assumes a dedicated IAM role.
+
+This provides temporary AWS credentials for the workflow.
+
+
+# Security
+
+Several security practices were implemented throughout the project.
+
++ S3
+- The S3 bucket is not intended to be directly accessed by users.
+- CloudFront uses Origin Access Control to securely retrieve objects from the bucket.
+
++ CloudFront OAC
+- CloudFront requests to S3 are signed using SigV4.
+- This allows the S3 bucket policy to restrict access to the CloudFront distribution.
+
++ HTTPS
+- The custom domain uses an ACM certificate and CloudFront HTTPS.
+- HTTP requests are redirected to HTTPS.
+
++ IAM
+- GitHub Actions does not use permanent AWS access keys.
+- The deployment workflow assumes an IAM role through OIDC.
+- IAM permissions were also explicitly expanded when new Terraform resources required additional permissions.
+
+# Issues Faced
+
+
+
+# Progress Timeline Report
 
 Source for AWS Documentation: https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+
 GitHub Documentation: https://docs.github.com/en/actions/reference/security/oidc
 - That resolves the OIDC issue. GitHub has recently changed the path for repos that are created from 15th of July 2026 onwards
 - GitHub Action failed > Need permission for ACM > Added in the list of access statements in the GitHub Actions Module
 - Test failed due to the lack of policy > Added in the GitHub Actions policy statement > Ran only the AWS credentials locally to bootstrap the policy > Testing again
 
-Next Addition/Action: 
-- CloudFront invalidation will cost money after 1000 requests. For this project, it will not be an issue > However, will setup CloudWatch notification later on
-- Add Admin page to enable CRUD for the tunings and scales data
-- Add metronome
-
 15/8/2026
 - Testing failed > No "existing" ACM is in the Terraform because it was only ran locally > terraform apply only the ACN so that it is pushed into the terraform state file
+- API is not working on the domain > Added ib the list of allowed origins in environment resource
 
 14/8/2026
 - Added Domains through ACM and CloudFlare. Added to Cloudfront module and edited main to include the certificate from ACM
+Important Reminder: ACM is and can only be used in us-east-1
 
 9/8/2026
 - Changing the architecture a little in the HTML and added a function to call the initial tuning on initial load to display standard tuning from Javascript instead of hard coding, and added functionality so that the open strings are editable for custom tunings
@@ -101,21 +279,16 @@ Note:
 - Adding and setting up Cloudfron module. Had to fix all issues that came up when setting it up
 
 23/7/2026:
-- Had to create a new module for the S3 bucket policy, because of a circular dependancy issue and after troubleshooting, the current module responsibilities:
-
-- S3 Module
-- Bucket
-- Versioning
-- Encryption
-- Ownership Controls
-- Public Access Block
+- Deployed to GitHub after initial local testing
+- Had to create a new module for the S3 bucket policy, because of a circular dependancy issue and after troubleshooting > Fixing
 
 
-- CloudFront Module
-- Distribution
-- OAC
-- Cache Behavior
+# Author
 
-- S3 Bucket Policy Module
-- Generating IAM policy
-- Attaching policy
+Farhan Azrayl Zailani
+
+GitHub:
+https://github.com/FarhanAzrayl
+
+LinkedIn:
+https://www.linkedin.com/in/farhan-azrayl-zailani/
