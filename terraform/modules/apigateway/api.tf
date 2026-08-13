@@ -19,10 +19,10 @@ resource "aws_apigatewayv2_api" "http" {
       "*"
 
       /*
-  Examples for later if nak improve and applykan the concept of least privillege
-  "GET",
-  "OPTIONS"
-  */
+    Examples for later if nak improve and applykan the concept of least privillege
+    "GET",
+    "OPTIONS"
+    */
 
     ]
 

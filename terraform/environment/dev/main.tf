@@ -105,7 +105,8 @@ module "apigateway" {
 
   # This is for CORS Cloudfront access > This is to read the CloudFront as https://d1hlg16pug3eiu.cloudfront.net for example
   allowed_origins = [
-    "https://${module.cloudfront.distribution_domain_name}"
+    "https://${module.cloudfront.distribution_domain_name}",
+    "https://guitar-fretboard.com"
   ]
 }
 

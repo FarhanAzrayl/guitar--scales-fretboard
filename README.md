@@ -13,6 +13,7 @@ Source for AWS Documentation: https://registry.terraform.io/providers/hashicorp/
 GitHub Documentation: https://docs.github.com/en/actions/reference/security/oidc
 - That resolves the OIDC issue. GitHub has recently changed the path for repos that are created from 15th of July 2026 onwards
 - GitHub Action failed > Need permission for ACM > Added in the list of access statements in the GitHub Actions Module
+- Test failed due to the lack of policy > Added in the GitHub Actions policy statement > Ran only the AWS credentials locally to bootstrap the policy > Testing again
 
 Next Addition/Action: 
 - CloudFront invalidation will cost money after 1000 requests. For this project, it will not be an issue > However, will setup CloudWatch notification later on
