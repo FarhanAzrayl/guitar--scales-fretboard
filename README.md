@@ -1,7 +1,7 @@
 # guitar--scales-fretboard
 Guitar Fretboard featuring notes, scales and visual indicators for learning. This project is to assist in solidifying my understanding of a potential team-oriented workflow, and while doing that to also learn musical and guitar scales as I am a guitar player and would like to improve myself. The project is aimed to hit two birds with one stone, mixing practical working knowledge and hobby related knowledge.
 
-## Live Demo
+# Live Demo
 
 **Website:**  
 https://guitar-fretboard.com/
@@ -53,14 +53,14 @@ The deployment so far includes:
 
 # Technologies
 
-+ Programming / Configuration
+### Programming / Configuration
 - HTML5
 - CSS3
 - JavaScript
 - Python
 - Terraform (HCL)
 
-+ Development Tools
+### Development Tools
 - Visual Studio Code
 - Git
 - GitHub
@@ -68,7 +68,7 @@ The deployment so far includes:
 - AWS CLI
 - Git Bash
 
-+ Cloud / Infrastructure
+### Cloud / Infrastructure
 - Amazon S3
 - Amazon CloudFront
 - AWS Certificate Manager (ACM)
@@ -85,7 +85,7 @@ The infrastructure is managed using Terraform rather than being manually configu
 
 Terraform is structured into reusable modules for the different components of the application.
 
-+ Current modules include:
+### Current modules include:
 - S3
 - CloudFront
 - S3 Bucket Policy
@@ -98,7 +98,7 @@ Terraform is structured into reusable modules for the different components of th
 - GitHub Actions / IAM
 - Bootstrap infrastructure
 
-+ Current Terraform resources include:
+### Current Terraform resources include:
 - Amazon S3
 - S3 Bucket
 - Bucket Versioning
@@ -107,7 +107,7 @@ Terraform is structured into reusable modules for the different components of th
 - Public Access Configuration
 - S3 Objects
 
-+ Amazon CloudFront
+### Amazon CloudFront
 - CloudFront Distribution
 - CloudFront Origin Access Control (OAC)
 - Cache Behavior
@@ -115,7 +115,7 @@ Terraform is structured into reusable modules for the different components of th
 - Custom Domain
 - CloudFront Cache Invalidation
 
-+ AWS Certificate Manager
+### AWS Certificate Manager
 - ACM Certificate
 - guitar-fretboard.com
 - *.guitar-fretboard.com
@@ -123,24 +123,24 @@ Terraform is structured into reusable modules for the different components of th
 
 The ACM certificate is provisioned in us-east-1 for use with CloudFront.
 
-+ Amazon API Gateway
+### Amazon API Gateway
 - API Gateway HTTP API
 - /scales
 - /tunings
 - Lambda integration
 - CORS configuration
 
-+ AWS Lambda
+### AWS Lambda
 - Python Lambda function
 - IAM execution role
 - DynamoDB permissions
 - CloudWatch logging permissions
 
-+ Amazon DynamoDB
+### Amazon DynamoDB
 - Scales table
 - Tunings table
 
-+ AWS IAM
+### AWS IAM
 - Lambda execution role
 - Lambda policies
 - GitHub Actions deployment role
@@ -166,19 +166,19 @@ This provides temporary AWS credentials for the workflow.
 
 Several security practices were implemented throughout the project.
 
-+ S3
+### S3
 - The S3 bucket is not intended to be directly accessed by users.
 - CloudFront uses Origin Access Control to securely retrieve objects from the bucket.
 
-+ CloudFront OAC
+### CloudFront OAC
 - CloudFront requests to S3 are signed using SigV4.
 - This allows the S3 bucket policy to restrict access to the CloudFront distribution.
 
-+ HTTPS
+### HTTPS
 - The custom domain uses an ACM certificate and CloudFront HTTPS.
 - HTTP requests are redirected to HTTPS.
 
-+ IAM
+### IAM
 - GitHub Actions does not use permanent AWS access keys.
 - The deployment workflow assumes an IAM role through OIDC.
 - IAM permissions were also explicitly expanded when new Terraform resources required additional permissions.
