@@ -19,6 +19,9 @@ resource "aws_cloudfront_distribution" "website" {
   # If false, ofc la no traffic could go through
   enabled = true
 
+  # This one is the domain / ACM name that we added btw > This distribution is also responsible for requests to guitar-fretboard.com
+  aliases = [var.domain_name]
+
   origin {
 
     # domain name ofc from the output S3 module sends on their output that was provided to them by the environment (dev/prod/test)
@@ -52,9 +55,11 @@ resource "aws_cloudfront_distribution" "website" {
   }
   # This is the closing curly bracket for default_cache_behavior btw
 
-  # If we buy a domain, we completely replace this block with our purchased domain
+  # This is from the domain that we purchased
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn      = var.acm_certificate_arn # Fetch the certificate ARN
+    ssl_support_method       = "sni-only"
+    minimum_protocol_version = "TLSv1.2_2021"
   }
 
   # In case we want to restrict certain countries, this is where we set it up

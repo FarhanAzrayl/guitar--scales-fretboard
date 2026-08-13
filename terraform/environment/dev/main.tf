@@ -20,6 +20,23 @@ module "s3" {
   */
 }
 
+# Connecting the Domain that was purchased and already setup in ACN via Console
+
+module "acm" {
+  source = "../../modules/acm"
+
+  providers = {
+    aws = aws.us_east_1
+  }
+
+  domain_name = "guitar-fretboard.com"
+
+  subject_alternative_names = [
+    "*.guitar-fretboard.com"
+  ]
+  tags = local.common_tags
+}
+
 module "cloudfront" {
   source = "../../modules/cloudfront"
 
@@ -27,6 +44,10 @@ module "cloudfront" {
   project_name                = var.project_name
   environment                 = var.environment
   tags                        = local.common_tags
+
+  # Declaring the domain name here
+  domain_name         = "guitar-fretboard.com"
+  acm_certificate_arn = module.acm.certificate_arn
 }
 
 # This is the extra module we had to create because of the circular dependancy issue we faced btw. Flaw in earlier design

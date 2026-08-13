@@ -21,3 +21,16 @@ variable "tags" {
   description = "Common tags applied to all CloudFront resources."
   type        = map(string)
 }
+
+
+# Adding these 2 to connect the domains / ACM
+
+variable "domain_name" {
+  description = "Custom domain name for the CloudFront distribution."
+  type        = string
+}
+
+variable "acm_certificate_arn" {
+  description = "ARN of the ACM certificate used by CloudFront."
+  type        = string
+}

@@ -25,6 +25,7 @@ Next Addition/Action:
 - Testing the highlight function
 - Added the functionality of the tuning preset > Testing
 - Fixed colour and buttobn issues after amending CSS
+- Added secrets variable in GitHub repo and added the workflow for GitHub Actions to run CloufFront invalidation after every terraform apply
 
 8/82026
 - Fixed the errors on Javascript file; app.js again after facing errors when adding new functions > Testing
