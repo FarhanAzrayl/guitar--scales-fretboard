@@ -12,11 +12,15 @@ Live Demo: https://d1hlg16pug3eiu.cloudfront.net/
 Source for AWS Documentation: https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 GitHub Documentation: https://docs.github.com/en/actions/reference/security/oidc
 - That resolves the OIDC issue. GitHub has recently changed the path for repos that are created from 15th of July 2026 onwards
+- GitHub Action failed > Need permission for ACM > Added in the list of access statements in the GitHub Actions Module
 
 Next Addition/Action: 
 - CloudFront invalidation will cost money after 1000 requests. For this project, it will not be an issue > However, will setup CloudWatch notification later on
 - Add Admin page to enable CRUD for the tunings and scales data
 - Add metronome
+
+15/8/2026
+- Testing failed > No "existing" ACM is in the Terraform because it was only ran locally > terraform apply only the ACN so that it is pushed into the terraform state file
 
 14/8/2026
 - Added Domains through ACM and CloudFlare. Added to Cloudfront module and edited main to include the certificate from ACM

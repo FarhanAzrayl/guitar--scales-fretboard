@@ -69,6 +69,7 @@ data "aws_iam_policy_document" "github_actions_permissions" {
   actions = [
     "acm:DescribeCertificate",
     "acm:ListCertificates",
+    "acm:ListTagsForCertificate",
     "acm:RequestCertificate",
     "acm:DeleteCertificate",
     "acm:AddTagsToCertificate",
